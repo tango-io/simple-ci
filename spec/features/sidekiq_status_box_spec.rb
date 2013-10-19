@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 feature 'Sidekiq status box' do
-  include AjaxSupport
 
   before do
+    Sidekiq.stub(:redis).and_return(7)
     visit root_path
   end
 
@@ -15,16 +15,16 @@ feature 'Sidekiq status box' do
 
   it 'displays total workers', :js do
     text = find('.js-total').text
-    expect(text).to eq('0')
+    expect(text).to eq('25')
   end
 
   it 'displays the amount of busy workers', :js do
     text = find('.js-busy').text
-    expect(text).to eq('0')
+    expect(text).to eq('7')
   end
 
   it 'displays the amounts of available workers', :js do
     text = find('.js-available').text
-    expect(text).to eq('0')
+    expect(text).to eq('18')
   end
 end

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
+
 gem 'puma'
 gem 'rails', '4.0.0'
 gem 'sass-rails', '~> 4.0.0'
@@ -14,21 +16,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :development do
-  gem 'pry-rails'
-  gem 'guard-rails'
-  gem 'guard-rspec'
-  gem 'guard-spork'
-  gem 'spork-rails'
-end
-
 group :test do
-  gem 'guard-rspec'
   gem 'rspec-rails'
 end
 
-group :development, :test do
-  gem 'capybara'
-  gem "capybara-webkit"
+group :development do
   gem 'pry-rails'
 end

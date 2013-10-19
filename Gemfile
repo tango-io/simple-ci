@@ -15,6 +15,8 @@ end
 
 group :development do
   gem 'guard-rails'
+  gem 'guard-rspec'
+  gem 'spork-rails'
 end
 
 group :test do
@@ -26,5 +28,4 @@ group :development, :test do
   gem 'capybara'
   gem "capybara-webkit"
   gem 'pry'
-  gem 'spork'
 end

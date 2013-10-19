@@ -2,7 +2,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   el: 'body',
 
   events: {
-    'change .github_url' : 'validateUrl'
+    'change input.github_url' : 'validateUrl'
   },
 
   initialize: function(){
@@ -16,20 +16,37 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
 
           console.log("Successful match");
 
-          $header.addClass('red');
-          $header.find('input').replaceWith(scriptTemplate);
-
-          this.scriptArea = new simpleCI.Views.scriptStage();
-          this.scriptArea.fetchScript(e.target.value)
-
-          setTimeout(function(){
-            $header.find('div.form-control').addClass('script-stage');
-          }, 0);
-
-          $header.find('p').slideUp('slow').remove();
-         $('.text-url-github, .text-worker').hide('fast');
+          this.switchToCIWork($header, e.target.value);
+          this.hideMainPageElements()
       }else{
           console.log("No match");
       }
+  },
+
+  switchToCIWork: function(target, url){
+    this.renderScriptTemplate(target);
+    this.retrieveAppScript(url);
+    this.renderAppScript(target);
+  },
+
+  renderScriptTemplate: function(target){
+    target.addClass('red');
+    target.find('input').replaceWith(scriptTemplate);
+  },
+
+  retrieveAppScript: function(url){
+    this.scriptArea = new simpleCI.Views.scriptStage();
+    this.scriptArea.fetchScript(url);
+  },
+
+  renderAppScript: function(target){
+    setTimeout(function(){
+      target.find('div.form-control').addClass('script-stage');
+    }, 0);
+  },
+
+  hideMainPageElements: function(){
+    this.$el.find('header p').slideUp('slow').hide('slow');
+    this.$el.find('.text-url-github, .text-worker').hide('fast');
   }
 })

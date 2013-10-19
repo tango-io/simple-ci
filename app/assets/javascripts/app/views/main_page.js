@@ -3,6 +3,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
 
   events: {
     'change input.github_url' : 'validateUrl'
+    'click .glyphicon-remove' : 'renderHomePage'
   },
 
   initialize: function(){
@@ -48,5 +49,12 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   hideMainPageElements: function(){
     this.$el.find('header p').slideUp('slow').hide('slow');
     this.$el.find('.text-url-github, .text-worker').hide('fast');
+  },
+
+  renderHomePage: function(){
+      $header = this.$el.find('header');
+      homeTemplate = _.template(JST['templates/home_template']());
+      $header.removeClass('red');
+      $header.find('.form-control').replaceWith(homeTemplate);
   }
 })

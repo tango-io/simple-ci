@@ -13,7 +13,6 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
         if(regex.test(e.target.value)){
           console.log("Successful match");
           this.$el.find('header').addClass('red');
-          this.$el.find('header .simple_ci_logo').attr('src', '/assets/logo-white.png')
       }else{
           console.log("No match");
       }

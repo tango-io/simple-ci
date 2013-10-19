@@ -4,8 +4,10 @@ R13Team186::Application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   root to: 'pages#index'
+  
+  resources :jobs, only: [:create]
 
-  resources :pages do
+  resources :pages, only: [:index] do
     collection do
       get :verify_gemfile
     end

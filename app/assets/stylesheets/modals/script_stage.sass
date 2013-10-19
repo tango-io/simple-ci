@@ -1,0 +1,42 @@
+header
+  .form-control
+    h3, textarea, input[type='submit']
+      opacity: 0
+      transition: opacity 1s linear
+
+    h3
+      font-weight: bold
+      padding-left: 20px
+      text-align: left
+
+    textarea
+      background-color: #202020
+      border: none
+      border-radius: 15px
+      color: white
+      display: block
+      font-family: monaco
+      font-size: 14px
+      height: 60%
+      margin: 30px auto
+      padding: 20px
+      width: 70%
+
+    input[type='submit']
+      background-color: #720000
+      border: none
+      border-radius: 15px
+      color: white
+      padding: 14px 40px 12px 40px
+
+.script-stage
+  height: 500px
+  top: 256px !important
+  transition: 1s linear
+
+  h3, textarea, input[type='submit']
+    opacity: 1 !important
+    transition: opacity 1s linear .5s !important
+
+.glyphicon-remove.script-stage
+  text-align: right

@@ -11,6 +11,8 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'pg'
+gem 'sidekiq'
+gem 'sinatra'
 
 group :doc do
   gem 'sdoc', require: false

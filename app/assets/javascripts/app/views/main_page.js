@@ -12,6 +12,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
       var regex = new RegExp("(https://github.com)\/([a-z0-9\-_])+\/[a-z0-9\-_]");
         if(regex.test(e.target.value)){
           console.log("Successful match");
+          this.$el.find('header').addClass('red');
       }else{
           console.log("No match");
       }

@@ -80,6 +80,8 @@ GEM
       childprocess (>= 0.2.3)
       guard (>= 1.1)
       spork (>= 0.8.4)
+    haml (4.0.3)
+      tilt
     headless (1.0.1)
     hike (1.2.3)
     httpclient (2.3.4.1)
@@ -223,6 +225,7 @@ DEPENDENCIES
   guard
   guard-rspec
   guard-spork
+  haml (~> 4.0.3)
   headless
   jbuilder (~> 1.2)
   jquery-rails

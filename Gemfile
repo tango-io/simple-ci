@@ -16,6 +16,7 @@ end
 group :development do
   gem 'guard-rails'
   gem 'guard-rspec'
+  gem 'guard-spork'
   gem 'spork-rails'
 end
 

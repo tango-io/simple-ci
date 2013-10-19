@@ -4,6 +4,7 @@ simpleCI.Router = Backbone.Router.extend ({
   },
 
   mainPage: function(){
+    this.workerStatus = new simpleCI.Views.workerStatus();
     this.mainView = new simpleCI.Views.mainPage();
   }
 })

@@ -24,7 +24,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
           }, 0);
 
           $header.find('p').slideUp('slow').remove();
-         $('.text-url-github, .text-worker').hide('slow');
+         $('.text-url-github, .text-worker').hide('fast');
       }else{
           console.log("No match");
       }

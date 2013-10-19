@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+echo "* Starting deployment of Simple-CI"
+
+GIT_DIR=$(pwd)
+cd ..
+
+export RAILS_ENV=`git branch | grep '*' | awk '{print $2}' `
+
+source /usr/local/rvm/scripts/rvm
+
+echo "* Deploying on $RAILS_ENV"
+
+echo "* checkout head"
+env -i git reset --hard
+
+echo '* deploy gems'
+bundle install --without development test --deployment
+
+echo '* rake db:migrate'
+bundle exec rake db:migrate
+
+echo '* compiling assets'
+bundle exec rake assets:clean assets:precompile
+
+echo '* restart webserver'
+kill -s HUP `tmp/pids/puma.pid`
+bundle exec puma -d --pidfile=tmp/pids/puma.pid

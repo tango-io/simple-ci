@@ -11,8 +11,20 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   validateUrl: function(e){
       var regex = new RegExp("(https://github.com)\/([a-z0-9\-_])+\/[a-z0-9\-_]");
         if(regex.test(e.target.value)){
+          $header = this.$el.find('header');
+          scriptTemplate = _.template(JST['templates/script_template']());
+
           console.log("Successful match");
-          this.$el.find('header').addClass('red');
+
+          $header.addClass('red');
+          $header.find('input').replaceWith(scriptTemplate);
+
+          setTimeout(function(){
+            $header.find('div.form-control').addClass('script-stage');
+          }, 0);
+
+          $header.find('p').slideUp('slow').remove();
+         $('.text-url-github, .text-worker').hide('slow');
       }else{
           console.log("No match");
       }

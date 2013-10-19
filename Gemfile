@@ -15,6 +15,7 @@ group :doc do
 end
 
 group :development do
+  gem 'pry-rails'
   gem 'guard-rails'
   gem 'guard-rspec'
   gem 'guard-spork'

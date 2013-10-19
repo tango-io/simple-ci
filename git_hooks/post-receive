@@ -24,5 +24,5 @@ echo '* compiling assets'
 bundle exec rake assets:clean assets:precompile
 
 echo '* restart webserver'
-kill -s HUP `tmp/pids/puma.pid`
+kill -s HUP `cat tmp/pids/puma.pid`
 bundle exec puma -d --pidfile tmp/pids/puma.pid -e production -p 3000

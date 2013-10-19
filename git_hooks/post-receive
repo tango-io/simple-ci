@@ -24,7 +24,7 @@ echo '* compiling assets'
 bundle exec rake assets:clean assets:precompile
 
 echo '* restart sidekiq'
-kill -s HUP `cat tmp/pids/sidekiq`
+kill -s HUP `cat tmp/pids/sidekiq.pid`
 bundle exec sidekiq -d --pidfile tmp/pids/sidekiq.pid --logfile log/sidekiq.log -e production
 
 echo '* restart webserver'

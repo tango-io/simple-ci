@@ -9,7 +9,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   validateUrl: function(e){
-      var regex = new RegExp("(https://github.com)\/([a-z0-9\-_])+\/[a-z0-9\-_]");
+      var regex = new RegExp("(https://github.com)\/([a-zA-Z0-9\-_])+\/[a-zA-Z0-9\-_]");
         if(regex.test(e.target.value)){
           $header = this.$el.find('header');
           scriptTemplate = _.template(JST['templates/script_template']());
@@ -18,6 +18,9 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
 
           $header.addClass('red');
           $header.find('input').replaceWith(scriptTemplate);
+
+          this.scriptArea = new simpleCI.Views.scriptStage();
+          this.scriptArea.fetchScript(e.target.value)
 
           setTimeout(function(){
             $header.find('div.form-control').addClass('script-stage');

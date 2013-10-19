@@ -7,6 +7,8 @@ feature 'Sidekiq status box' do
     visit root_path
   end
 
+  # TODO add ajax wait here
+ 
   it 'has a div for display the status', :js do
     expect(page).to have_css('.workers-status-box')
   end

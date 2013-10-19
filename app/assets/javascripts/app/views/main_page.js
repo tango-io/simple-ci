@@ -2,7 +2,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   el: 'body',
 
   events: {
-    'change input.github_url' : 'validateUrl'
+    'change input.github_url' : 'validateUrl',
     'click .glyphicon-remove' : 'renderHomePage'
   },
 
@@ -46,15 +46,34 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     }, 0);
   },
 
+  hideScriptStage: function(target){
+      setTimeout(function(){
+        target.find('div.form-control').removeClass('script-stage');
+      },0);
+  },
+
   hideMainPageElements: function(){
     this.$el.find('header p').slideUp('slow').hide('slow');
     this.$el.find('.text-url-github, .text-worker').hide('fast');
+  },
+
+  showMainPageElements: function(){
+    this.$el.find('header p').slideDown('slow').show('slow');
+    this.$el.find('.text-url-github, .text-worker').show('fast');
   },
 
   renderHomePage: function(){
       $header = this.$el.find('header');
       homeTemplate = _.template(JST['templates/home_template']());
       $header.removeClass('red');
-      $header.find('.form-control').replaceWith(homeTemplate);
+      this.hideScriptStage($header);
+      this.showMainPageElements();
+      this.restoreGithubURLInput($header);
+  },
+
+  restoreGithubURLInput: function(target){
+      setTimeout(function(){
+          target.find('.form-control').replaceWith(homeTemplate);
+      }, 2000);
   }
 })

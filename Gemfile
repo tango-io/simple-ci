@@ -21,8 +21,21 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'pry'
 end
 
-group :development do
-  gem 'pry-rails'
+group :test do
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'spork-rails', github: 'sporkrb/spork-rails'
+  gem 'rb-fsevent', '~> 0.9'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
+  gem 'fabrication'
+  gem 'faker'
+  gem 'shoulda-matchers'
+  gem 'headless'
+  gem 'os'
 end

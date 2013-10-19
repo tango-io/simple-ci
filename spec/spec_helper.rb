@@ -1,19 +1,27 @@
 require 'rubygems'
-ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
-require 'rspec/autorun'
+require 'spork'
 
-RSpec.configure { |c| c.treat_symbols_as_metadata_keys_with_true_values = true }
+Spork.prefork do
+  require 'rubygems'
+  ENV["RAILS_ENV"] ||= 'test'
+  require File.expand_path("../../config/environment", __FILE__)
+  require 'rspec/rails'
+  require 'rspec/autorun'
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+  RSpec.configure { |c| c.treat_symbols_as_metadata_keys_with_true_values = true }
 
-ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-RSpec.configure do |config|
+  ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.infer_base_class_for_anonymous_controllers = false
+  RSpec.configure do |config|
+
+    config.fixture_path = "#{::Rails.root}/spec/fixtures"
+    config.infer_base_class_for_anonymous_controllers = false
+
+  end
 
 end
 
+Spork.each_run do
+end

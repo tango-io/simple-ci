@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'pg'
 gem 'sidekiq'
 gem 'sinatra'
+gem 'pusher'
 
 group :doc do
   gem 'sdoc', require: false

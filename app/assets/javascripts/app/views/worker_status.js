@@ -3,6 +3,7 @@ simpleCI.Views.workerStatus = Backbone.View.extend({
   
   initialize: function(){
     var self = this;
+    this.updateStatus();
     setInterval(function(){
       self.updateStatus();
     }, 3000);

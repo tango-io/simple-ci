@@ -17,7 +17,7 @@ class Github
   TEST_ENV = %w(rspec)
 
   def is_valid?
-    @gemfile.nil? ? false : update_script 
+    @gemfile.nil? ? false : update_script
   end
 
   private
@@ -26,13 +26,14 @@ class Github
     url.slice(/\/[^\/]+$/).gsub('/', '')
   end
 
-  def update_script 
+  def update_script
     gem_list = generate_list
     if gem_list.include?(TEST_ENV)
       @script << 'bundle exec rspec'
     else
       @script << 'rake test'
     end
+    true
   end
 
   def generate_list

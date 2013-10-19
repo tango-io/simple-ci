@@ -13,7 +13,7 @@ feature 'Sidekiq status box' do
 
   it 'displays total workers', :js do
     text = find('.js-total').text
-    expect(text).to eq('25')
+    expect(text).to eq('0')
   end
 
   it 'displays the amount of busy workers', :js do

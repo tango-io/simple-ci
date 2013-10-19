@@ -15,6 +15,7 @@ gem 'pg'
 gem 'sidekiq'
 gem 'sinatra'
 gem 'pusher'
+gem 'decent_exposure'
 
 group :doc do
   gem 'sdoc', require: false

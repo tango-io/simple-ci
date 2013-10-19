@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20131019124340) do
   create_table "jobs", force: true do |t|
     t.text     "session_id"
     t.string   "github_url"
+    t.text     "script"
     t.text     "log_output"
     t.datetime "created_at"
     t.datetime "updated_at"

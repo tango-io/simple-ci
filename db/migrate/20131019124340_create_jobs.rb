@@ -3,6 +3,7 @@ class CreateJobs < ActiveRecord::Migration
     create_table :jobs do |t|
       t.text   :session_id
       t.string :github_url
+      t.text   :script
       t.text   :log_output
       t.timestamps
     end

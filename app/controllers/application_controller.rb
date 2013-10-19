@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :set_session
 
+  decent_configuration do
+    strategy DecentExposure::StrongParametersStrategy
+  end
+
   private
 
   def set_session

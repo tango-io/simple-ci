@@ -17,3 +17,7 @@
 //= require ./app/simple_ci
 //= require ./app/router
 //= require_tree ./app/views
+
+$(function(){
+  simpleCI.initialize();
+})

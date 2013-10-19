@@ -9,8 +9,11 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   validateUrl: function(e){
-    alert('working again :3');
-    var regex=/^https:\/\/\w+([\.\-\w]+)?\.([a-z]{2,4}|travel)(:\d{2,5})?(\/.*)?$/i;
-    return regex.test(url);
+      var regex = new RegExp("(https://github.com)\/([a-z0-9\-_])+\/[a-z0-9\-_]");
+        if(regex.test(e.target.value)){
+          console.log("Successful match");
+      }else{
+          console.log("No match");
+      }
   }
 })

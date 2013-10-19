@@ -9,7 +9,7 @@ describe Github do
     end
 
     it 'is_valid? return true if the gemfile is valid' do
-      expect(@gemfile.is_valid?).should be_true
+      expect(@gemfile.is_valid?).to be_true
     end
 
     it 'folder_name return a name of folder from an url' do

@@ -26,9 +26,9 @@ group :development, :test do
 end
 
 group :test do
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-spork'
+  gem 'guard', '1.8.2'
+  gem 'guard-rspec', '3.0.2'
+  gem 'guard-spork', '1.5.1'
   gem 'spork-rails', github: 'sporkrb/spork-rails'
   gem 'rb-fsevent', '~> 0.9'
   gem 'capybara'

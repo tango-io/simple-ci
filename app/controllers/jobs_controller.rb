@@ -16,7 +16,6 @@ class JobsController < ApplicationController
   def create
     respond_to  do |format|
       if job.save
-        RunTestsWorker.perform_async(job.id)
         format.json { render json: { message: 'Successfully enqueued test' }, status: :ok }
       else
         format.json { render json: { message: 'Something went wrong' }, status: :unprocessable_entity }

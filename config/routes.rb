@@ -5,4 +5,8 @@ R13Team186::Application.routes.draw do
 
   resources :pages
   root to: 'pages#index'
+
+  namespace :api do
+    resources :workers, only: [:index]
+  end
 end

@@ -125,8 +125,9 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     }), self = this;
 
     request.done(function(response){
+      var $header = self.$el.find('header')
       self.model['script'] = response.script;
-      self.renderAppScript(target);
+      self.renderAppScript($header);
       self.scriptArea.fetchScript(self.model.script);
     });
 

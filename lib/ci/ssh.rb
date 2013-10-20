@@ -51,14 +51,11 @@ module Ci
         end
       end
 
-      if block_given?
-        @session.loop(0.5) do
-          early_exit = yield
-          !(early_exit || !!exit_code)
-        end
-      else
-        @session.loop(1)
-      end
+      @session.loop(1)
+    end
+
+    def close
+      @session.close if open?
     end
 
     private

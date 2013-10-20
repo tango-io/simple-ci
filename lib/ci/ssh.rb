@@ -15,7 +15,7 @@ module Ci
       @host     = options[:host]
       @port     = options[:port]
       @password = options[:password]
-      @buffer   = ""
+      @buffer   = options[:buffer] || ""
     end
 
     def connect
@@ -65,7 +65,7 @@ module Ci
     end
 
     def argument_whitelist
-      [:host, :user, :port, :password]
+      [:host, :user, :port, :password, :buffer]
     end
 
     def open?

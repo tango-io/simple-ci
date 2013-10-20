@@ -3,7 +3,15 @@ class RunTestsWorker
 
   def perform(id)
     job = Job.find(id)
-    # TODO add vagrant stuff
+
+    vm = Ci::Environment.new(
+      Ci::Buffer.new(job)
+    )
+
+    vm.upload_script("~/#{job.session_id}.sh", job.shell_script)
+    vm.exec("chmod +x ~/#{job.session_id}.sh")
+    vm.exec("./#{job.session_id}.sh")
+    vm.session.close
   end
 
 end

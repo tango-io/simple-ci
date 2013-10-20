@@ -3,6 +3,7 @@ header
     h3, textarea, input[type='submit']
       opacity: 0
       transition: opacity 1s linear
+      -webkit-transition: opacity 1s linear
 
     h3
       font-weight: bold
@@ -37,16 +38,18 @@ header
 .red
   background: asset_url('pattern-red.jpg')
   transition: 1s linear 0.5s
+  -webkit-transition: 1s linear 0.5s
 
   .simple-ci-logo
     background: asset_url('logo-white.png') no-repeat
     transition: 2s
+    -webkit-transition: 2s
 
 .script-stage
   height: 500px
   top: 256px !important
-  transition: 1s linear
+  -webkit-transition: 1s linear
 
   h3, textarea, input[type='submit']
     opacity: 1 !important
-    transition: opacity 1s linear .5s !important
+    -webkit-transition: opacity 1s linear .5s !important

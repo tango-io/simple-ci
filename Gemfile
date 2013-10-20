@@ -25,6 +25,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
+  gem 'os'
 end
 
 group :test do
@@ -40,5 +41,4 @@ group :test do
   gem 'faker'
   gem 'shoulda-matchers'
   gem 'headless'
-  gem 'os'
 end

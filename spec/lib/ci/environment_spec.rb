@@ -21,8 +21,27 @@ describe Ci::Environment, 'uploader' do
 
   let(:environment) { Ci::Environment.new }
 
-  it 'uploads a file from a given script' do
-    expect(environment.session).to be_present
+  it 'receives two parameters' do
+    expect { environment.upload_script }.to raise_error
+  end
+
+  it 'generates the script from the given two parameters' do
+    environment.stub(:exec).and_return(true)
+    expect(
+      environment.upload_script("~/script.sh", "echo 'Foo'")
+    ).to be_true
+  end
+
+end
+
+describe Ci::Environment, 'exec' do
+
+  let(:environment) { Ci::Environment.new }
+
+  it 'executes a  command' do
+    environment.session.stub(:exec).and_return(true)
+    expect(environment.session).to receive(:exec)
+    environment.exec('some command')
   end
 
 end

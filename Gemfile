@@ -16,6 +16,7 @@ gem 'sidekiq'
 gem 'sinatra'
 gem 'pusher'
 gem 'decent_exposure'
+gem 'net-ssh'
 
 group :doc do
   gem 'sdoc', require: false

@@ -8,7 +8,7 @@ class Github
     @script  = [
       "git clone #{@url}",
       "cd #{folder_name @url}",
-      "bundle install --path vendor",
+      "bundle install --path vendor/bundle",
     ]
   end
 

@@ -46,16 +46,17 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
       this.model['github_url'] = e.target.value;
       this.switchToCIWork($header);
       this.hideMainPageElements()
+
     }else{
-      // TODO Display an actual error in the UI
-      console.log("No match");
+      this.$el.find('.github_url').val('')
+                                  .attr('placeholder',' Please, provide a valid repo URL')
+                                  .addClass('fail-icon')
     }
   },
 
   switchToCIWork: function(target){
     this.renderScriptTemplate(target);
-    this.retrieveAppScript();
-    this.renderAppScript(target);
+    this.retrieveAppScript(target);
   },
 
   renderScriptTemplate: function(target){
@@ -68,7 +69,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     }
   },
 
-  retrieveAppScript: function(){
+  retrieveAppScript: function(target){
     this.scriptArea = new simpleCI.Views.scriptStage();
 
     var request = $.ajax({
@@ -78,13 +79,25 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
 
     request.done(function(response){
       self.model['script'] = response.script;
+      self.renderAppScript(target);
       self.scriptArea.fetchScript(self.model.script);
     });
 
     request.error(function(response){
-      // TODO display an actual error
-      console.log(response);
+      self.$el.find('header').removeClass('red');
+      self.showMainPageElements();
+      self.scriptRetrievalError(self);
     });
+  },
+
+  scriptRetrievalError: function(self){
+    var homeTemplate = _.template(JST['templates/home_template']());
+    setTimeout(function(){
+      self.$el.find('.form-control').replaceWith(homeTemplate);
+      self.$el.find('.github_url').val('')
+                                  .attr('placeholder',' Please, provide a valid repo url')
+                                  .addclass('fail-icon')
+    }, 2000);
   },
 
   renderAppScript: function(target){
@@ -141,7 +154,18 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     });
 
     request.error(function(response){
-      // TODO handle error somehow
+      var $header = self.$el.find('header')
+      var homeTemplate = _.template(JST['templates/home_template']());
+      $header.removeClass('red');
+      self.hideScriptStage($header);
+      self.showMainPageElements();
+
+      setTimeout(function(){
+        self.$el.find('.form-control').replaceWith(homeTemplate);
+        self.$el.find('.github_url').val('')
+                                    .attr('placeholder','Something went wrong, try again later')
+                                    .addClass('fail-icon')
+      }, 2000);
     });
   },
 

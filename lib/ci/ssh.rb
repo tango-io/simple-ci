@@ -69,7 +69,7 @@ module Ci
     end
 
     def open?
-      @truesession && !@session.closed?
+      @session && !@session.closed?
     end
 
   end

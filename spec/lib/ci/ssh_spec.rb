@@ -53,3 +53,34 @@ describe Ci::SSH, 'connect' do
   end
 
 end
+
+describe Ci::SSH, 'private methods' do
+
+  let(:connection) do
+    Ci::SSH.new(
+      user:     Faker::Name.name,
+      password: Faker::Internet.password,
+      host:     Faker::Internet.ip_v4_address,
+      port:     22
+    )
+  end
+
+  before do
+    Net::SSH.stub(:start).and_return(double(closed?: false))
+    connection.connect
+    connection.session.stub(:close).and_return(true)
+  end
+
+  it 'returns if the connection is open' do
+    expect(connection.send(:open?)).to be_true
+  end
+
+  it 'raise an argument error' do
+    expect { connection.send(:raise_errors) }.to raise_error
+  end
+
+  it 'closes the connection' do
+    expect(connection.close).to be_true
+  end
+
+end

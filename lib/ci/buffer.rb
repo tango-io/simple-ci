@@ -9,7 +9,7 @@ module Ci
     end
 
     def << (text)
-      @stream << text
+      @stream = text
       Pusher.trigger @session_id, 'log_update', log: @stream
     end
 

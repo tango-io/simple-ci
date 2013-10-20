@@ -3,48 +3,59 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
 
   events: {
     'change input.github_url' : 'validateUrl',
-    'click .remove-script' : 'renderHomePage',
-    'click .btn-run' : 'renderRunScript',
-    'click .remove-console' : 'renderToScript'
+    'click .remove-script'    : 'renderHomePage',
+    'click .btn-run'          : 'renderRunScript',
+    'click .remove-console'   : 'renderToScript'
   },
 
-  initialize: function(){
-  },
+  model: {},
 
   validateUrl: function(e){
-      var regex = new RegExp("(https://github.com)+(\/[a-zA-Z0-9\-_]+)+(\/[a-zA-Z0-9\-_]+)+$");
-        if(regex.test(e.target.value)){
-          $header = this.$el.find('header');
-          scriptTemplate = _.template(JST['templates/script_template']());
-          urlGithub = e.target.value;
-
-          console.log("Successful match");
-
-          this.switchToCIWork($header, e.target.value);
-          this.hideMainPageElements()
-      }else{
-          console.log("No match");
-      }
+    var regex = new RegExp("(https://github.com)+(\/[a-zA-Z0-9\-_]+)+(\/[a-zA-Z0-9\-_]+)+$");
+    if(regex.test(e.target.value)){
+      var $header = this.$el.find('header')
+      this.model['github_url'] = e.target.value;
+      this.switchToCIWork($header);
+      this.hideMainPageElements()
+    }else{
+      // TODO Display an actual error in the UI
+      console.log("No match");
+    }
   },
 
-  switchToCIWork: function(target, url){
+  switchToCIWork: function(target){
     this.renderScriptTemplate(target);
-    this.retrieveAppScript(url);
+    this.retrieveAppScript();
     this.renderAppScript(target);
   },
 
   renderScriptTemplate: function(target){
+    var scriptTemplate = _.template(JST['templates/script_template']());
     target.addClass('red');
     if ($('input').length > 0) {
-        target.find('input').replaceWith(scriptTemplate);
+      target.find('input').replaceWith(scriptTemplate);
     }else{
-        target.find('.console').replaceWith(scriptTemplate);
+      target.find('.console').replaceWith(scriptTemplate);
     }
   },
 
-  retrieveAppScript: function(url){
+  retrieveAppScript: function(){
     this.scriptArea = new simpleCI.Views.scriptStage();
-    this.scriptArea.fetchScript(url);
+
+    var request = $.ajax({
+      url: '/pages/verify_gemfile?repository=' + this.model.github_url,
+      method: 'get'
+    }), self = this;
+
+    request.done(function(response){
+      self.model['script'] = response.script;
+      self.scriptArea.fetchScript(self.model.script);
+    });
+
+    request.error(function(response){
+      // TODO display an actual error
+      console.log(response);
+    });
   },
 
   renderAppScript: function(target){
@@ -54,9 +65,9 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   hideScriptStage: function(target){
-      setTimeout(function(){
-        target.find('div.form-control').removeClass('script-stage');
-      },0);
+    setTimeout(function(){
+      target.find('div.form-control').removeClass('script-stage');
+    },0);
   },
 
   hideMainPageElements: function(){
@@ -70,46 +81,59 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   renderHomePage: function(){
-      $header = this.$el.find('header');
-      homeTemplate = _.template(JST['templates/home_template']());
-      $header.removeClass('red');
-      this.hideScriptStage($header);
-      this.showMainPageElements();
-      this.restoreGithubURLInput($header);
+    var $header = this.$el.find('header')
+    $header.removeClass('red');
+    this.hideScriptStage($header);
+    this.showMainPageElements();
+    this.restoreGithubURLInput($header);
   },
 
   restoreGithubURLInput: function(target){
-      setTimeout(function(){
-          target.find('.form-control').replaceWith(homeTemplate);
-      }, 2000);
+    var homeTemplate = _.template(JST['templates/home_template']());
+    setTimeout(function(){
+      target.find('.form-control').replaceWith(homeTemplate);
+    }, 2000);
   },
-  
+
   renderRunScript: function(){
-      $header = this.$el.find('header');
-      consoleTemplate = _.template(JST['templates/console_template']());
-      this.hideScriptStage($header);
-      this.renderConsoleTemplate($header);
-      this.renderAppConsole($header);
-      /* $header.find('.form-control').replaceWith(consoleTemplate); */
+    var $header = this.$el.find('header');
+
+    var request = $.ajax({
+      type: 'post',
+      url: '/jobs',
+      dataType: 'JSON',
+      data: { job: this.model }
+    }), self = this;
+
+    request.done(function(response){
+      self.hideScriptStage($header);
+      self.renderConsoleTemplate($header);
+      self.renderAppConsole($header);
+    });
+
+    request.error(function(response){
+      // TODO handle error somehow
+    });
   },
-  
+
   renderAppConsole: function(target){
     setTimeout(function(){
       target.find('div.form-control').addClass('console');
     }, 0);
   },
-  
+
   renderConsoleTemplate: function(target){
-      setTimeout(function(){
-          target.find('.form-control').replaceWith(consoleTemplate);
-      }, 1000);
+    var consoleTemplate = _.template(JST['templates/console_template']());
+    setTimeout(function(){
+      target.find('.form-control').replaceWith(consoleTemplate);
+    }, 1000);
   },
-  
+
   renderToScript: function(){
-    $header = this.$el.find('header');
+    var $header = this.$el.find('header');
     this.renderScriptTemplate($header);
     this.retainConsoleBG($header);
-    this.retrieveAppScript(urlGithub);
+    this.retrieveAppScript(this.model.github_url);
     this.fadeToScriptStage($header)
   },
 
@@ -118,9 +142,9 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   fadeToScriptStage: function(target){
-      setTimeout(function(){
-          target.find('.form-control').css({'background':'', 'transition':'.5s linear'})
-      }, 200);
+    setTimeout(function(){
+      target.find('.form-control').css({'background':'', 'transition':'.5s linear'})
+    }, 200);
   },
-  
+
 })

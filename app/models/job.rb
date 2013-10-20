@@ -4,8 +4,6 @@ class Job < ActiveRecord::Base
 
   after_create :trigger_job
 
-  after_save :publish_change, if: -> { log_output_changed? }
-
   def trigger_job
     RunTestsWorker.perform_async(self.id)
     publish(
@@ -16,10 +14,6 @@ class Job < ActiveRecord::Base
 
   def publish(event_type, data)
     Pusher.trigger(self.session_id, event_type, data)
-  end
-
-  def publish_change
-    publish 'log_update', log: log_output
   end
 
   def shell_script

@@ -5,7 +5,7 @@ class RunTestsWorker
     job = Job.find(id)
 
     vm = Ci::Environment.new(
-      Ci::Buffer.new(job)
+      Ci::Buffer.new(job.session_id)
     )
 
     vm.upload_script("~/#{job.session_id}.sh", job.shell_script)

@@ -1,3 +1,4 @@
+require 'ansi_colors'
 module Ci
   class Buffer
 
@@ -9,7 +10,7 @@ module Ci
     end
 
     def << (text)
-      @stream = text
+      @stream = AnsiColors.to_html(text)
       Pusher.trigger @session_id, 'log_update', log: @stream
     end
 

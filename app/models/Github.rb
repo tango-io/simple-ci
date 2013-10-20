@@ -27,10 +27,10 @@ class Github
 
   def update_script
     unless scan_empty?(REGEXP_DB)
-      @script << 'rake db:create'
-      @script << 'rake db:test:prepare'
+      @script << 'bundle exec rake db:create'
+      @script << 'bundle exec rake db:test:prepare'
     end
-    scan_empty?(TEST_ENV) ? @script << 'bundle exec rspec' : @script << 'rake test'
+    scan_empty?(TEST_ENV) ? @script << 'bundle exec rspec' : @script << 'bundle exec rake test'
     true
   end
 

@@ -24,12 +24,13 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     //     stuff...
     //  }
     //
+    
     channel.bind('job_started', function(data) {
       console.log(data.message);
     });
 
     channel.bind('log_update', function(data) {
-      console.log(data.message);
+      console.log(data.log);
     });
 
     channel.bind('job_ended', function(data) {

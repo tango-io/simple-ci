@@ -25,7 +25,7 @@ class JobsController < ApplicationController
 
   private
     def job_params
-      params.require(:job).permit(:github_url, :session_id, :script)
+      params.require(:job).permit(:github_url, :session_id, script: [])
     end
 
     def set_session_id

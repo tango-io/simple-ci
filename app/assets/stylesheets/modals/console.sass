@@ -16,10 +16,18 @@ header
       height: 90%
       resize: none
       width: 100%
-    
+      overflow-x: hidden
+      text-align: left
+
     .run, .glyphicon-remove
       opacity: 1 !important
       -webkit-transition: opacity 1s linear .5s !important
+
+    .run span
+      display: block
+
+    .run span.inline
+      display: inline
 
   .console .run, .console
     background-color: #202020

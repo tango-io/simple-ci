@@ -11,6 +11,8 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   model: {},
 
   initialize: function(){
+    globalScope = this;
+
     var sessionId = $('#session_id_').val();
 
     var pusher = new Pusher('eee03ea9b340e480db94');
@@ -28,12 +30,27 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   updateConsole: function(data){
+    helpers = {}
+    helpers['enter'] = '\n'
+
     if ($('.console > .run').length > 0) {
       $('.console > .run').val($('.console > .run').val() + data.log);
       $('.console > .run').scrollTop($('.run').prop('scrollHeight'));
     } else {
-      // TODO show transition and display build info
+        if (data.log != helpers.enter){
+            globalScope.resumeCI();
+        }
     }
+  },
+
+  resumeCI: function(){
+    var $header = globalScope.$el.find('header');
+    $header.addClass('red');
+    globalScope.renderConsoleTemplate($header);
+    globalScope.hideScriptStage($header);
+    globalScope.renderConsoleTemplate($header);
+    globalScope.renderAppConsole($header);
+    globalScope.hideMainPageElements();
   },
 
   validateUrl: function(e){

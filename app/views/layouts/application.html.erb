@@ -9,7 +9,7 @@
   </head>
   <body>
     <script src="http://s0.railsrumble.com/banner.js" type="text/javascript"></script>
-    <%= hidden_field :session_id, "", value: session[:user][:id] %>
+    <%= hidden_field :session_id, "", value: request.session_options[:id] %>
     <%= render :partial => "layouts/header" %>
     <div class="container content" >
       <%= yield %>

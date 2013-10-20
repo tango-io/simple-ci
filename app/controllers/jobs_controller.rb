@@ -29,6 +29,6 @@ class JobsController < ApplicationController
     end
 
     def set_session_id
-      params[:job].merge!(session_id: session[:user][:id])
+      params[:job].merge!(session_id: request.session_options[:id])
     end
 end

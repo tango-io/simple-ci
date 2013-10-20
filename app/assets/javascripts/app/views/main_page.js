@@ -16,11 +16,16 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     var pusher = new Pusher('eee03ea9b340e480db94');
     var channel = pusher.subscribe(sessionId);
 
+    var self = this;
+
     channel.bind('job_started', function(data) {
       console.log(data.message);
     });
 
-    channel.bind('log_update', this.updateConsole);
+    channel.bind('log_update', function(data){
+      self.updateConsole(data)
+    });
+
     channel.bind('job_ended', function(data) {
       console.log(data.message);
     });
@@ -28,12 +33,27 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   updateConsole: function(data){
+    helpers = {}
+    helpers['enter'] = '\n'
+
     if ($('.console > .run').length > 0) {
       $('.console > .run').val($('.console > .run').val() + data.log);
       $('.console > .run').scrollTop($('.run').prop('scrollHeight'));
     } else {
-      // TODO show transition and display build info
+        if (data.log != helpers.enter){
+            this.resumeCI();
+        }
     }
+  },
+
+  resumeCI: function(){
+    var $header = this.$el.find('header');
+    $header.addClass('red');
+    this.renderConsoleTemplate($header);
+    this.hideScriptStage($header);
+    this.renderConsoleTemplate($header);
+    this.renderAppConsole($header);
+    this.hideMainPageElements();
   },
 
   validateUrl: function(e){

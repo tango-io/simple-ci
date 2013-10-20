@@ -30,7 +30,7 @@ class Github
       @script << 'bundle exec rake db:create'
       @script << 'bundle exec rake db:test:prepare'
     end
-    scan_empty?(TEST_ENV) ? @script << 'bundle exec rspec' : @script << 'bundle exec rake test'
+    scan_empty?(TEST_ENV) ? @script << 'rake test' : @script << 'bundle exec rspec'
     true
   end
 

@@ -21,7 +21,7 @@ mkdir #{self.session_id}
 cd #{self.session_id}
 #{self.script.join("\n")}
 cd ~/
-rm -rf #{self.session_id}
+rm -rf #{self.session_id}*
     BASH
     string
   end

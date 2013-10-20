@@ -37,7 +37,7 @@ module Ci
           channel.exec("/bin/bash --login -c #{Shellwords.escape(command)}") do |ch, success|
             raise StandardError, "could not execute command" unless success
             ch.on_data do |ch, data|
-              @buffer << data
+              puts @buffer << data
             end
 
             ch.on_extended_data do |ch, data|

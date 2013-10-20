@@ -61,6 +61,7 @@ GEM
     database_cleaner (1.1.1)
     decent_exposure (2.2.1)
     diff-lcs (1.2.4)
+    ejs (1.1.1)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -226,6 +227,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   decent_exposure
+  ejs
   fabrication
   faker
   guard (= 1.8.2)

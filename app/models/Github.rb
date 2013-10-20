@@ -7,7 +7,7 @@ class Github
     @gemfile = open(url_gemfile).read rescue nil
     @script  = [
       "git clone #{@url}",
-      "cd #{folder_name @url}",
+      "cd #{@url.folder_name}",
       "bundle install --path vendor/bundle",
     ]
   end
@@ -19,11 +19,12 @@ class Github
     @gemfile.nil? ? false : update_script
   end
 
-  private
-
-  def folder_name url
-    url.slice(/\/[^\/]+$/).gsub('/', '')
+  def folder_name
+    url.split.last
   end
+
+
+  private
 
   def update_script
     unless scan_empty?(REGEXP_DB)

@@ -33,14 +33,14 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   renderInlineSpan: function(criteria, content){
-    var logEntry = "<span class='inline'>" + content + "</span>"
+    var logEntry = "<span>" + content + "</span>"
       , target = $('.run span').last()
 
     if(target.text().match(criteria)){
       target.replaceWith($(logEntry));
 
     }else{
-      $(logEntry).removeClass('inline').appendTo($('.run'));
+      $(logEntry).appendTo($('.run'));
     }
 
   },

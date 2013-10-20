@@ -2,7 +2,7 @@ module Ci
 
   class SSH
 
-    attr_reader :user, :host, :password, :port, :buffer
+    attr_reader :user, :host, :password, :port, :buffer, :session
 
     def initialize(options={})
       #
@@ -69,7 +69,7 @@ module Ci
     end
 
     def open?
-      @session && !@session.closed?
+      @truesession && !@session.closed?
     end
 
   end

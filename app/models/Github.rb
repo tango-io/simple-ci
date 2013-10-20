@@ -7,7 +7,7 @@ class Github
     @gemfile = open(url_gemfile).read rescue nil
     @script  = [
       "git clone #{@url}",
-      "cd #{folder_name @url}",
+      "cd #{url.split('/').last}",
       "bundle install --path vendor/bundle",
     ]
   end
@@ -21,16 +21,12 @@ class Github
 
   private
 
-  def folder_name url
-    url.slice(/\/[^\/]+$/).gsub('/', '')
-  end
-
   def update_script
     unless scan_empty?(REGEXP_DB)
       @script << 'bundle exec rake db:create'
       @script << 'bundle exec rake db:test:prepare'
     end
-    scan_empty?(TEST_ENV) ? @script << 'bundle exec rspec' : @script << 'bundle exec rake test'
+    scan_empty?(TEST_ENV) ? @script << 'bundle exec rake test' : @script << 'bundle exec rspec'
     true
   end
 

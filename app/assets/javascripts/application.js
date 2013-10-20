@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require base_plugins
+//= require_tree ./templates
 //= require ./app/simple_ci
 //= require ./app/router
 //= require_tree ./app/views

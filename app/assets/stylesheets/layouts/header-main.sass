@@ -1,7 +1,9 @@
 header
   background: asset_url('pattern-blue.jpg')
   min-height: 450px
+  position: relative
   text-align: center
+  padding-top: 66px
 
   p
     margin: 0 auto
@@ -9,23 +11,23 @@ header
     font-size: 1.6em
     color: #faf9fc
     text-align: justify
-    max-width: 1170px
 
-  img
-    margin-top: 65px
+  .simple-ci-logo
+    background: asset_url('logo-blue.png') no-repeat
+    height: 126px
+    width: 511px
+    margin: 0 auto
 
   .form-control
     border: 6px solid rgba(0, 0, 0, 0.4)
     border-radius: 15px
-    box-sizing: content-box
-    min-height: 50px
+    left: 0
+    min-height: 80px
     margin: 0 auto
-    position: relative
-    top: 65px
-    width: 1170px
+    max-width: 1170px
+    position: absolute
+    right: 0
+    top: 409px
     font-size: 1.4em
-
-  .loading-icon
-    background: #FFFFFE url(/assets/icon-loading.gif) no-repeat 98% 10px
-    background-size: 40px
-
+    transition: 2s
+    -webkit-transition: 2s

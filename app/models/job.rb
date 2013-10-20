@@ -9,6 +9,7 @@ class Job < ActiveRecord::Base
   def trigger_job
     RunTestsWorker.perform_async(self.id)
     publish(
+      'job_started',
       message: "Started job #{self.id}"
     )
   end

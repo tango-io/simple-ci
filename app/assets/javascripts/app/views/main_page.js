@@ -108,8 +108,19 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   renderToScript: function(){
     $header = this.$el.find('header');
     this.renderScriptTemplate($header);
+    this.retainConsoleBG($header);
     this.retrieveAppScript(urlGithub);
-    this.renderAppScript($header);
-  }
+    this.fadeToScriptStage($header)
+  },
+
+  retainConsoleBG: function(target){
+    target.find('div.form-control').addClass('script-stage').css('background', '#202020');
+  },
+
+  fadeToScriptStage: function(target){
+      setTimeout(function(){
+          target.find('.form-control').css({'background':'', 'transition':'.5s linear'})
+      }, 200);
+  },
   
 })

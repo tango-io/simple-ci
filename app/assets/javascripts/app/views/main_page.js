@@ -135,6 +135,9 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
 
   renderRunScript: function(){
     var $header = this.$el.find('header');
+    var $text = this.$el.find('textarea').val();
+
+    this.model['script'] = [ $text ];
 
     var request = $.ajax({
       type: 'post',

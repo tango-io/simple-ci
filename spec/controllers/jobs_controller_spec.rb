@@ -7,7 +7,7 @@ describe JobsController do
   end
 
   it 'triggers the CI work' do
-    post :create, format: :json, job: { github_url: Faker::Internet.url, script: Faker::Lorem.sentence }
+    post :create, format: :json, job: { github_url: Faker::Internet.url, script: [ Faker::Lorem.sentence ] }
     expect(response.status).to eq(200)
     expect(RunTestsWorker.jobs.size).to eq(1)
   end

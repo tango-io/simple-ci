@@ -22,11 +22,6 @@ describe Github do
       @gemfile.script.should include('rake test' || 'bundle exec rspec')
     end
 
-    it 'generate_list return list of gems ' do
-      list = @gemfile.send(:generate_list)
-      list.should be_kind_of(Array)
-    end
-
     it 'url_gemfile return an url to get a gemfile' do
       url = @gemfile.send(:url_gemfile)
       url.should eq("#{@url}/raw/master/Gemfile")

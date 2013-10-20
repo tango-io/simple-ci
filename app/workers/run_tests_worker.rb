@@ -2,6 +2,7 @@ class RunTestsWorker
   include Sidekiq::Worker
 
   def perform(id)
+    sleep 3
     job = Job.find(id)
 
     vm = Ci::Environment.new(

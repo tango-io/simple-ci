@@ -10,6 +10,35 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
 
   model: {},
 
+  initialize: function(){
+    var sessionId = $('#session_id_').val();
+
+    var pusher = new Pusher('eee03ea9b340e480db94');
+    var channel = pusher.subscribe(sessionId);
+
+    // TODO refactor all this
+    //
+    //  channel.bind('log_update', this.updateConsole);
+    //
+    //  updateConsole: function(){
+    //     stuff...
+    //  }
+    //
+    channel.bind('job_started', function(data) {
+      console.log(data.message);
+    });
+
+    channel.bind('log_update', function(data) {
+      console.log(data.message);
+    });
+
+    channel.bind('job_ended', function(data) {
+      console.log(data.message);
+    });
+
+  },
+
+
   validateUrl: function(e){
     var regex = new RegExp("(https://github.com)+(\/[a-zA-Z0-9\-_]+)+(\/[a-zA-Z0-9\-_]+)+$");
     if(regex.test(e.target.value)){

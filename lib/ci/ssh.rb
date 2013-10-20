@@ -15,7 +15,7 @@ module Ci
       @host     = options[:host]
       @port     = options[:port]
       @password = options[:password]
-      @buffer   = ""
+      @buffer   = options[:buffer] || ""
     end
 
     def connect
@@ -37,7 +37,7 @@ module Ci
           channel.exec("/bin/bash --login -c #{Shellwords.escape(command)}") do |ch, success|
             raise StandardError, "could not execute command" unless success
             ch.on_data do |ch, data|
-              puts @buffer << data
+              @buffer << data
             end
 
             ch.on_extended_data do |ch, data|
@@ -65,7 +65,7 @@ module Ci
     end
 
     def argument_whitelist
-      [:host, :user, :port, :password]
+      [:host, :user, :port, :password, :buffer]
     end
 
     def open?

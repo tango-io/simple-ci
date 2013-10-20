@@ -25,6 +25,7 @@ describe Job, 'Publish to websocket' do
   it 'Publishes the change in the channel' do
     expect {
       job.publish(
+        'some_event',
         message: Faker::Lorem.sentence
       )
     }.to be_true

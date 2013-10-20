@@ -31,14 +31,4 @@ describe Job, 'Publish to websocket' do
     }.to be_true
   end
 
-  it 'receives publish change only if the log_output changes' do
-    expect(job).to receive(:publish_change)
-    job.update_attribute :log_output, Faker::Lorem.sentence
-  end
-
-  it 'does not receive publish change if there is no update for log_output' do
-    expect(job).to_not receive(:publish_change)
-    job.update_attribute :session_id, "foo"
-  end
-
 end

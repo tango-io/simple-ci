@@ -5,7 +5,7 @@ describe Ci::Buffer, 'initialize' do
   let(:job) { Fabricate :job }
 
   it 'receives the job' do
-    Ci::Buffer.new(job)
+    Ci::Buffer.new(job.session_id)
   end
 
   it 'returns an error if there\'s no job given' do
@@ -17,7 +17,7 @@ end
 describe Ci::Buffer, 'update buffer' do
 
   let!(:job)   { Fabricate :job }
-  let(:buffer) { Ci::Buffer.new(job) }
+  let(:buffer) { Ci::Buffer.new(job.session_id) }
 
   it 'updates the log_output from the job with the buffer of the ssh connection' do
     text = Faker::Lorem.sentence

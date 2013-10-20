@@ -50,7 +50,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     helpers['enter'] = '\n'
 
     if ($('.console > .run').length > 0) {
-      if(data.log.match('Resolving deltas') != null){
+      if(data.log.match('Resolving') != null){
         self.renderInlineSpan('Resolving', data.log)
 
       }else if(data.log.match('Compressing') != null){

@@ -13,7 +13,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   initialize: function(){
     var sessionId = $('#session_id_').val();
 
-    var pusher = new Pusher('eee03ea9b340e480db94');
+    var pusher = new Pusher('ed310d3e49f3ba4216a8');
     var channel = pusher.subscribe(sessionId);
 
     var self = this;

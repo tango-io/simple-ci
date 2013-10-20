@@ -1,6 +1,6 @@
 header
   .form-control
-    h3, textarea, input[type='submit'], .glyphicon-remove
+    h3, textarea, input[type='submit'], .remove-script
       opacity: 0
       transition: opacity 1s linear
 
@@ -38,11 +38,13 @@ header
   -webkit-transition: 1s linear
   z-index: 1
 
-  h3, textarea, input[type='submit'], .glyphicon-remove
+  h3, textarea, input[type='submit'], .remove-script
     opacity: 1 !important
     transition: opacity 1s linear !important
     -webkit-transition: opacity 1s linear !important
 
-  .glyphicon-remove
+  .remove-script
+    background: url(/assets/close.png) no-repeat right
     cursor: pointer
-    float: right
+    height: 22px
+    background-size: 22px

@@ -1,12 +1,13 @@
 header
   .form-control.console
-    .glyphicon-remove
+    .remove-console
       opacity: 0
       transition: opacity 1s linear
       -webkit-transition: opacity 1s linear
-      color: #ffffff
       cursor: pointer
-      float: right
+      background: url(/assets/close-white.png) no-repeat right
+      height: 22px
+      background-size: 22px
 
   .console
     width: 70%
@@ -19,7 +20,7 @@ header
       overflow-x: hidden
       text-align: left
 
-    .run, .glyphicon-remove
+    .run, .remove-console
       opacity: 1 !important
       -webkit-transition: opacity 1s linear .5s !important
 

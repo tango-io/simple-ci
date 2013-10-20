@@ -12,6 +12,8 @@ class RunTestsWorker
     vm.exec("chmod +x ~/#{job.session_id}.sh")
     vm.exec("./#{job.session_id}.sh")
     vm.session.close
+
+    job.publish('job_ended', message: 'Build FINISHED')
   end
 
 end

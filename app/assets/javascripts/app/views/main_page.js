@@ -30,6 +30,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   updateConsole: function(data){
     if ($('.console > .run').length > 0) {
       $('.console > .run').val($('.console > .run').val() + data.log);
+      $('.console > .run').scrollTop($('.run').prop('scrollHeight'));
     } else {
       // TODO show transition and display build info
     }

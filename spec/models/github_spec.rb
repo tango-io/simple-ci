@@ -19,7 +19,7 @@ describe Github do
 
     it 'update_script verify if gemfile have gems for testing' do
       @gemfile.send(:update_script)
-      @gemfile.script.should include('rake test' || 'bundle exec rspec')
+      @gemfile.script.should include('bundle exec rake test' || 'bundle exec rspec')
     end
 
     it 'url_gemfile return an url to get a gemfile' do

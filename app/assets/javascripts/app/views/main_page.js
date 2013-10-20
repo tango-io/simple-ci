@@ -37,7 +37,8 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     helpers['enter'] = '\n'
 
     if ($('.console > .run').length > 0) {
-      $('.console > .run').val($('.console > .run').val() + data.log);
+      var logEntry = "<span>" + data.log + "</span>";
+      $(logEntry).appendTo($('.run'));
       $('.console > .run').scrollTop($('.run').prop('scrollHeight'));
     } else {
         if (data.log != helpers.enter){

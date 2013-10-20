@@ -193,6 +193,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     setTimeout(function(){
       target.find('div.form-control').addClass('console');
     }, 0);
+    $(".nano").nanoScroller();
   },
 
   renderConsoleTemplate: function(target){

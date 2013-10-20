@@ -9,12 +9,11 @@ class Github
       "git clone #{@url}",
       "cd #{folder_name @url}",
       "bundle install --path vendor",
-      "rake db:create",
-      "rake db:test:prepare"
     ]
   end
 
-  TEST_ENV = %w(rspec)
+  TEST_ENV  = /rspec/
+  REGEXP_DB = /pg|mysql|mongo|sqllite3|mysql2|oci8|mysqlplus/
 
   def is_valid?
     @gemfile.nil? ? false : update_script
@@ -27,21 +26,16 @@ class Github
   end
 
   def update_script
-    gem_list = generate_list
-    if gem_list.include?(TEST_ENV)
-      @script << 'bundle exec rspec'
-    else
-      @script << 'rake test'
+    unless scan_empty?(REGEXP_DB)
+      @script << 'rake db:create'
+      @script << 'rake db:test:prepare'
     end
+    scan_empty?(TEST_ENV) ? @script << 'bundle exec rspec' : @script << 'rake test'
     true
   end
 
-  def generate_list
-    list = []
-    @gemfile.each_line do |line|
-      list << line.gsub("-", ' ') if line.include?("gem '")
-    end
-    list
+  def scan_empty? regexp
+    @gemfile.scan(regexp).empty?
   end
 
   def url_gemfile

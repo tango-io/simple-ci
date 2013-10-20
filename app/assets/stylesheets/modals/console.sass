@@ -1,0 +1,32 @@
+header
+  .form-control.console
+    .glyphicon-remove
+      opacity: 0
+      transition: opacity 1s linear
+      color: #ffffff
+      cursor: pointer
+      float: right
+
+  .console
+    width: 70%
+    height: 500px
+
+    .run
+      height: 90%
+      resize: none
+      width: 100%
+    
+    .run, .glyphicon-remove
+      opacity: 1 !important
+      transition: opacity 1s linear .5s !important
+
+  .console .run, .console
+    background-color: #202020
+    color: white
+    display: block
+    font-family: monaco
+    font-size: 14px
+    top: 256px !important
+    opacity: 1 !important
+    transition: opacity 1s linear !important
+    z-index: 1

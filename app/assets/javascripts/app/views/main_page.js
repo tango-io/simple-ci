@@ -3,7 +3,9 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
 
   events: {
     'change input.github_url' : 'validateUrl',
-    'click .glyphicon-remove' : 'renderHomePage'
+    'click .remove-script' : 'renderHomePage',
+    'click .btn-run' : 'renderRunScript',
+    'click .remove-console' : 'renderToScript'
   },
 
   initialize: function(){
@@ -14,6 +16,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
         if(regex.test(e.target.value)){
           $header = this.$el.find('header');
           scriptTemplate = _.template(JST['templates/script_template']());
+          urlGithub = e.target.value;
 
           console.log("Successful match");
 
@@ -32,7 +35,11 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
 
   renderScriptTemplate: function(target){
     target.addClass('red');
-    target.find('input').replaceWith(scriptTemplate);
+    if ($('input').length > 0) {
+        target.find('input').replaceWith(scriptTemplate);
+    }else{
+        target.find('.console').replaceWith(scriptTemplate);
+    }
   },
 
   retrieveAppScript: function(url){
@@ -75,5 +82,34 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
       setTimeout(function(){
           target.find('.form-control').replaceWith(homeTemplate);
       }, 2000);
+  },
+  
+  renderRunScript: function(){
+      $header = this.$el.find('header');
+      consoleTemplate = _.template(JST['templates/console_template']());
+      this.hideScriptStage($header);
+      this.renderConsoleTemplate($header);
+      this.renderAppConsole($header);
+      /* $header.find('.form-control').replaceWith(consoleTemplate); */
+  },
+  
+  renderAppConsole: function(target){
+    setTimeout(function(){
+      target.find('div.form-control').addClass('console');
+    }, 0);
+  },
+  
+  renderConsoleTemplate: function(target){
+      setTimeout(function(){
+          target.find('.form-control').replaceWith(consoleTemplate);
+      }, 1000);
+  },
+  
+  renderToScript: function(){
+    $header = this.$el.find('header');
+    this.renderScriptTemplate($header);
+    this.retrieveAppScript(urlGithub);
+    this.renderAppScript($header);
   }
+  
 })

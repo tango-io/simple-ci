@@ -16,7 +16,7 @@ class Job < ActiveRecord::Base
 
   def shell_script
     string =<<-BASH
-#!bin/bash
+#!/bin/bash
 mkdir #{self.session_id}
 cd #{self.session_id}
 #{self.script.join("\n")}

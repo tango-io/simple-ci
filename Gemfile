@@ -16,6 +16,7 @@ gem 'sidekiq'
 gem 'sinatra'
 gem 'pusher'
 gem 'decent_exposure'
+gem 'net-ssh'
 
 group :doc do
   gem 'sdoc', require: false
@@ -24,6 +25,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
+  gem 'os'
 end
 
 group :test do
@@ -39,5 +41,4 @@ group :test do
   gem 'faker'
   gem 'shoulda-matchers'
   gem 'headless'
-  gem 'os'
 end

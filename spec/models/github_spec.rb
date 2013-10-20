@@ -12,11 +12,6 @@ describe Github do
       expect(@gemfile.is_valid?).to be_true
     end
 
-    it 'folder_name return a name of folder from an url' do
-      folder_name = @gemfile.send(:folder_name, @url)
-      folder_name.should eq(@url.slice(/\/[^\/]+$/).gsub('/', ''))
-    end
-
     it 'update_script verify if gemfile have gems for testing' do
       @gemfile.send(:update_script)
       @gemfile.script.should include('bundle exec rake test' || 'bundle exec rspec')

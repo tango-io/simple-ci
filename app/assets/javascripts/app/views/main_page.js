@@ -32,13 +32,42 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
 
   },
 
+  renderInlineSpan: function(criteria, content){
+    var logEntry = "<span class='inline'>" + content + "</span>"
+      , target = $('.run span').last()
+
+    if(target.text().match(criteria)){
+      target.replaceWith($(logEntry));
+
+    }else{
+      $(logEntry).removeClass('inline').appendTo($('.run'));
+    }
+
+  },
+
   updateConsole: function(data){
-    helpers = {}
+    var helpers = {}, logEntry = "", self = this
     helpers['enter'] = '\n'
 
     if ($('.console > .run').length > 0) {
-      var logEntry = "<span>" + data.log + "</span>";
-      $(logEntry).appendTo($('.run'));
+      if(data.log.match('Resolving deltas') != null){
+        self.renderInlineSpan('Resolving', data.log)
+
+      }else if(data.log.match('Compressing') != null){
+        self.renderInlineSpan('Compressing', data.log)
+
+      }else if(data.log.match('Receiving') != null){
+        self.renderInlineSpan('Receiving', data.log)
+
+      }else if(data.log == '.' || data.log == '.\n' || data.log == 'E' || data.log == 'F' || data.log == '*' || data.log == 'S'){
+        logEntry = "<span class='inline'>" + data.log + "</span>";
+        $(logEntry).appendTo($('.run'));
+
+      }else{
+        logEntry = "<span>" + data.log + "</span>";
+        $(logEntry).appendTo($('.run'));
+      }
+
       $('.console > .run').scrollTop($('.run').prop('scrollHeight'));
     } else {
         if (data.log != helpers.enter){

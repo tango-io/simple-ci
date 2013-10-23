@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def link_to_dashboard
-    link_to 'dashboard', dashboard_user_path(current_user.nickname) if current_user
+    link_to 'dashboard', dashboard_user_path(current_user) if current_user
   end
 
   private

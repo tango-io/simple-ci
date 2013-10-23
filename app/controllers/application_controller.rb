@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
     unless current_user
       redirect_to :root
       flash[:alert] = "Access dennied"
-      
     end
   end
 

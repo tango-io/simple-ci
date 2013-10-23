@@ -1,0 +1,9 @@
+.dashboard
+  %table.table
+    %thead
+      %tr
+        %th add to review
+        %th status
+        %th name
+    %tbody
+      = render partial: 'repo', collection: @repos, as: 'repo'

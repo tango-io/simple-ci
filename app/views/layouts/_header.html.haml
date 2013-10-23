@@ -1,11 +1,7 @@
 %header
   .menu
-    .pull-left
-      %ul.nav.nav-bar
-        %li
-          = link_to_dashboard
     .pull-right
-      = link_to_sign_in
+      = session_links
   .container
     = link_to root_path do
       .simple-ci-logo

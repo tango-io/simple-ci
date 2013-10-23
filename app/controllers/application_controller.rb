@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     unless current_user
-      redirect_to :root
+      redirect_to root_path
       flash[:alert] = "Access dennied"
     end
   end

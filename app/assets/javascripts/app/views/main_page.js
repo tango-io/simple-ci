@@ -202,6 +202,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
       self.hideScriptStage($header);
       self.renderConsoleTemplate($header);
       self.renderAppConsole($header);
+      console.log('success')
     });
 
     request.error(function(response){

@@ -1,15 +1,12 @@
 %header
   .menu
-    %ul.nav.nav-bar
-      %li
-        = link_to_dashboard
-    = link_to_sign_in
+    .pull-left
+      %ul.nav.nav-bar
+        %li
+          = link_to_dashboard
+    .pull-right
+      = link_to_sign_in
   .container
     = link_to root_path do
       .simple-ci-logo
-    %p
-      A continuous integration tool for github ruby projects
-      %br
-      You can easily use simple CI to run your tests and almost config-free. Just write the url for your Github project (EG. https://github.com/user/ruby-project), edit your deployment script and run!
-
-    = text_field_tag 'github_url', nil, class: 'github_url form-control', placeholder: 'https://github.com/path/to/project'
+    = yield :header_description

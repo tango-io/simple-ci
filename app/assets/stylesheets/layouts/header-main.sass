@@ -1,13 +1,19 @@
+@import 'mixins/colors'
 header
   background: asset-url('pattern-blue.jpg')
-  min-height: 450px
   position: relative
   text-align: center
-  padding-top: 66px
+
+  .menu
+    background: $dark-gray
+    height: 50px
+    padding-left: 10px
+    padding-right: 10px
+
+    .pull-left, .pull-right
 
   p
-    margin: 0 auto
-    margin-top: 65px
+    margin-bottom: 80px
     font-size: 1.6em
     color: #faf9fc
     text-align: justify
@@ -16,19 +22,5 @@ header
     background: asset-url('logo-blue.png') no-repeat
     height: 126px
     width: 511px
-    margin: 0 auto
-    margin-top: 18px
+    margin: 40px auto
 
-  .form-control
-    border: 6px solid rgba(0, 0, 0, 0.4)
-    border-radius: 15px
-    left: 0
-    min-height: 80px
-    margin: 0 auto
-    max-width: 1170px
-    position: absolute
-    right: 0
-    top: 409px
-    font-size: 1.4em
-    transition: 2s
-    -webkit-transition: 2s

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe JobsController do
-  
+
   before do
     RunTestsWorker.stub(:jobs).and_return([])
   end

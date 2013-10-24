@@ -8,8 +8,4 @@ module ApplicationHelper
     end
   end
 
-  def link_to_dashboard
-    link_to 'dashboard', dashboard_user_path(current_user) if current_user
-  end
-
 end

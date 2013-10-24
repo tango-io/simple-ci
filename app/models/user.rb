@@ -1,20 +1,26 @@
 require 'open-uri'
+
 class User < ActiveRecord::Base
 
-  def self.create_from_omniauth auth
-    create! do |user|
-      user.uid      = auth['uid']
-      user.provider = auth['provider']
-      user.name     = auth['info']['name']
-      user.nickname = auth['info']['nickname']
-    end
+  validates :name, :uid, :provider, :nickname, presence: true
+
+  validates :uid, :nickname, uniqueness: true
+
+  validates_inclusion_of :provider, in: %w(github)
+
+  def self.build_from_omniauth auth
+    new(
+      uid:      auth['uid'],
+      provider: auth['provider'],
+      name:     auth['info']['name'],
+      nickname: auth['info']['nickname']
+    )
   end
 
   def public_repositories
-    repos = JSON.parse(open("https://api.github.com/users/#{nickname}/repos").read)
-    repos.map do |repo|
-      { name: repo['name'] }
-    end
+    repos = open("https://api.github.com/users/#{nickname}/repos").read
+    repos = JSON.parse(repos)
+    repos.map { |repo| { name: repo['name'] } }
   end
 
 end

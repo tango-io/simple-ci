@@ -1,15 +1,19 @@
 class SessionsController < ApplicationController
+  expose(:user) { User.build_from_omniauth(request.env['omniauth.auth']) }
 
   def create
-    auth = request.env['omniauth.auth']
-    user = User.find_by_uid(auth["uid"]) || User.create_from_omniauth(auth)
-    session[:user_id] = user.id
-    redirect_to root_url, :notice => "Signed in!"
+    if user.save
+      session[:user_id] = user.id
+      redirect_to dashboard_index_path, :notice => "Signed in!"
+    else
+      session[:user_id] = nil
+      redirect_to :root, :notice => "Signed out!"
+    end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, :notice => "Signed out!"
+    redirect_to :root, :notice => "Signed out!"
   end
 
 end

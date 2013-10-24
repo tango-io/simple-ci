@@ -2,6 +2,6 @@ var simpleCI = {
   Views: {},
   initialize: function(){
     simpleCI.router = new simpleCI.Router();
-    Backbone.history.start({pushState: true});
+    Backbone.history.start({pushState: true, root: '/'});
   }
 }

@@ -4,10 +4,14 @@ simpleCI.Router = Backbone.Router.extend ({
     'dashboard' : 'dashboardPage'
   },
 
+  
+
   mainPage: function(){
     this.mainView = new simpleCI.Views.mainPage();
+    this.workerStatus = new simpleCI.Views.workerStatus();
   },
 
   dashboardPage: function(){
   }
+
 })

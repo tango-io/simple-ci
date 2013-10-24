@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates_inclusion_of :provider, in: %w(github)
 
   def self.build_from_omniauth auth
-    new(
+    find_or_initialize_by(
       uid:      auth['uid'],
       provider: auth['provider'],
       name:     auth['info']['name'],

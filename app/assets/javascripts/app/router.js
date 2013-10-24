@@ -5,11 +5,9 @@ simpleCI.Router = Backbone.Router.extend ({
   },
 
   mainPage: function(){
-    console.log('Ola k ase')
     this.mainView = new simpleCI.Views.mainPage();
   },
 
   dashboardPage: function(){
-    console.log('dashboard o k ase?');
   }
 })

@@ -5,9 +5,13 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4.modal-title Add repositories
       .modal-body
-        = render partial: 'repo', collection: repos, as: 'repo'
+        %table.table
+          %thead
+            %tr
+              %th name
+              %th add to CI repositories
+          %tbody
+            = render partial: 'public_repo', collection: github_repos, as: 'repo'
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
         %button.btn.btn-primary{type: "button"} Save
-
-

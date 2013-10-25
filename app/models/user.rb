@@ -20,7 +20,12 @@ class User < ActiveRecord::Base
   def public_repositories
     repos = open("https://api.github.com/users/#{nickname}/repos").read
     repos = JSON.parse(repos)
-    repos.map { |repo| { name: repo['name'] } }
+    repos.map do |repo|
+      {
+        name: repo['name'], 
+        url: repo['url'] 
+      }
+    end
   end
 
 end

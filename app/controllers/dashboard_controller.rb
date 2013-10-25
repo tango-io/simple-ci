@@ -2,8 +2,7 @@ class DashboardController < ApplicationController
   before_filter :authenticate_user!
 
   expose(:user) { current_user }
-  expose(:repos) { current_user.public_repositories }
+  expose(:github_repos) { current_user.public_repositories }
+  expose(:local_repos) { current_user.repositories }
 
-  def index
-  end
 end

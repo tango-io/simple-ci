@@ -1,9 +1,11 @@
 .dashboard.well
   %h3= "#{user.name} repositories"
+  %button.btn.btn-success
+    =link_to 'add repositories', '#add-repos-modal', 'data-toggle' => 'modal'
   %table.table
     %thead
       %tr
         %th name
         %th add to review
     %tbody
-      = render partial: 'repo', collection: repos, as: 'repo'
+= render partial: 'add_repos_modal'

@@ -1,0 +1,13 @@
+#add-repos-modal.modal.fade.in(tabindex="-1" role="dialog" aria-labelledby="addReposModal" aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4.modal-title Add repositories
+      .modal-body
+        = render partial: 'repo', collection: repos, as: 'repo'
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
+        %button.btn.btn-primary{type: "button"} Save
+
+

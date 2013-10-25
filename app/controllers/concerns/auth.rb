@@ -20,6 +20,6 @@ module Auth
     end
 
     def user_signed_in?
-      defined? @current_user
+      current_user
     end
 end

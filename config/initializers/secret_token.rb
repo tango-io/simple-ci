@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-R13Team186::Application.config.secret_key_base = 'dc0059e8ab5b563e7199a6f7aca5d37a6fc5f77179964225626bc2514a0d5ed4fd77908224ca982bff1058fef83aecd18c86260087cad8ac16b83fcf226bd94b'
+SimpleCI::Application.config.secret_key_base = 'dc0059e8ab5b563e7199a6f7aca5d37a6fc5f77179964225626bc2514a0d5ed4fd77908224ca982bff1058fef83aecd18c86260087cad8ac16b83fcf226bd94b'

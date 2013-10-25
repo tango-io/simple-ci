@@ -77,8 +77,8 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   resumeCI: function(){
-    var $header = this.$el.find('header');
-    $header.addClass('red');
+    var $header = this.$el.find('.container.content');
+    this.$el.find('header').addClass('red');
     this.renderConsoleTemplate($header);
     this.hideScriptStage($header);
     this.renderConsoleTemplate($header);
@@ -89,7 +89,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   validateUrl: function(e){
     var regex = new RegExp("(https://github.com)+(\/[a-zA-Z0-9\-_]+)+(\/[a-zA-Z0-9\-_]+)+$");
     if(regex.test(e.target.value)){
-      var $header = this.$el.find('header')
+      var $header = this.$el.find('.container.content')
       this.model['github_url'] = e.target.value;
       this.switchToCIWork($header);
       this.hideMainPageElements()
@@ -108,7 +108,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
 
   renderScriptTemplate: function(target){
     var scriptTemplate = _.template(JST['templates/script_template']());
-    target.addClass('red');
+    this.$el.find('header').addClass('red');
     if ($('input').length > 0) {
       target.find('input').replaceWith(scriptTemplate);
     }else{
@@ -125,7 +125,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     }), self = this;
 
     request.done(function(response){
-      var $header = self.$el.find('header')
+      var $header = self.$el.find('.container.content')
       self.model['script'] = response.script;
       self.renderAppScript($header);
       self.scriptArea.fetchScript(self.model.script);
@@ -171,7 +171,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   renderHomePage: function(){
-    var $header = this.$el.find('header')
+    var $header = this.$el.find('.container.content')
     $header.removeClass('red');
     this.hideScriptStage($header);
     this.showMainPageElements();
@@ -186,7 +186,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   renderRunScript: function(){
-    var $header = this.$el.find('header');
+    var $header = this.$el.find('.container.content');
     var $text = this.$el.find('textarea').val();
 
     this.model['script'] = [ $text ];
@@ -205,9 +205,9 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     });
 
     request.error(function(response){
-      var $header = self.$el.find('header')
+      var $header = self.$el.find('.container.content')
       var homeTemplate = _.template(JST['templates/home_template']());
-      $header.removeClass('red');
+      self.$el.find('header').removeClass('red');
       self.hideScriptStage($header);
       self.showMainPageElements();
 
@@ -235,7 +235,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   renderToScript: function(){
-    var $header = this.$el.find('header');
+    var $header = this.$el.find('.container.content');
     this.renderScriptTemplate($header);
     this.retainConsoleBG($header);
     this.retrieveAppScript(this.model.github_url);

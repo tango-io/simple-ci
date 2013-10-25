@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
 
   def index
+    redirect_to dashboard_index_path if user_signed_in?
   end
 
   def verify_gemfile

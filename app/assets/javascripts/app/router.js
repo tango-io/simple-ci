@@ -1,10 +1,17 @@
 simpleCI.Router = Backbone.Router.extend ({
   routes: {
-    '' : 'mainPage'
+    ''          : 'mainPage',
+    'dashboard' : 'dashboardPage'
   },
 
+  
+
   mainPage: function(){
-    this.workerStatus = new simpleCI.Views.workerStatus();
     this.mainView = new simpleCI.Views.mainPage();
+    this.workerStatus = new simpleCI.Views.workerStatus();
+  },
+
+  dashboardPage: function(){
   }
+
 })

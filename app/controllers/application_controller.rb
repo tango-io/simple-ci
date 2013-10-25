@@ -1,5 +1,6 @@
-require 'digest/sha1'
 class ApplicationController < ActionController::Base
+  include Auth
+
   protect_from_forgery with: :exception
 
   decent_configuration do

@@ -1,5 +1,5 @@
 simpleCI.Views.scriptStage = Backbone.View.extend({
-  el: 'header textarea',
+  el: 'textarea',
 
   fetchScript: function(script){
     this.buildScript(script);

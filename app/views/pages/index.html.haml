@@ -1,6 +1,12 @@
+= text_field_tag 'github_url', nil, class: 'github_url form-control', placeholder: 'https://github.com/path/to/project'
 = image_tag 'text-url-github.png', class: 'text-url-github'
 = image_tag 'text-worker.png', class: 'text-worker'
 
+= content_for :header_description do
+  %p
+    A continuous integration tool for github ruby projects
+    %br
+    You can easily use simple CI to run your tests and almost config-free. Just write the url for your Github project (EG. https://github.com/user/ruby-project), edit your deployment script and run!
 .workers-status-box
   %p
     %div

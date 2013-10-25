@@ -1,5 +1,8 @@
 require 'rubygems'
 require 'spork'
+require 'omniauth'
+OmniAuth.config.test_mode = true
+
 
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'

@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 
-R13Team186::Application.routes.draw do
+SimpleCI::Application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   get '/auth/:provider/callback', to: 'sessions#create'
   delete "/signout" => "sessions#destroy", :as => :signout

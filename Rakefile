@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-R13Team186::Application.load_tasks
+SimpleCI::Application.load_tasks

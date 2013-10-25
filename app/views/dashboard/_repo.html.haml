@@ -1,5 +1,3 @@
-%tr
-  %th
-    = check_box_tag 'add to review', true, false
-  %th ok
-  %th= repo[:name]
+%tr{ class: "#{['active', 'success', 'warning', 'danger'].sample}" }
+  %td= repo[:name]
+  %td= check_box_tag 'add to review', true, false

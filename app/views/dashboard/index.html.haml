@@ -1,10 +1,9 @@
-.dashboard
-  %h4= "#{user.name} repositories"
+.dashboard.well
+  %h3= "#{user.name} repositories"
   %table.table
     %thead
       %tr
-        %th add to review
-        %th status
         %th name
+        %th add to review
     %tbody
       = render partial: 'repo', collection: repos, as: 'repo'

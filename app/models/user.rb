@@ -2,10 +2,10 @@ require 'open-uri'
 
 class User < ActiveRecord::Base
 
+  has_many :repositories
+
   validates :name, :uid, :provider, :nickname, presence: true
-
   validates :uid, :nickname, uniqueness: true
-
   validates_inclusion_of :provider, in: %w(github)
 
   def self.build_from_omniauth auth

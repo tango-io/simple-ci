@@ -11,6 +11,8 @@ SimpleCI::Application.routes.draw do
 
   resources :dashboard, only: [:index]
 
+  resources :repositories, only: [:index, :create, :destroy]
+
   resources :pages, only: [:index] do
     collection do
       get :verify_gemfile

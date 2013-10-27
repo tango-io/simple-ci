@@ -14,4 +14,4 @@
             = render partial: 'public_repo', collection: github_repos, as: 'repo'
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Cancel
-        %button.btn.btn-primary{type: "button"} Save
+        %button#save.btn.btn-primary{type: "button"} Save

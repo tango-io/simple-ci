@@ -22,10 +22,15 @@ class User < ActiveRecord::Base
     repos = JSON.parse(repos)
     repos.map do |repo|
       {
-        name: repo['name'], 
-        url: repo['url'] 
+        id:   repo['id'],
+        name: repo['name'],
+        url:  repo['url']
       }
     end
+  end
+
+  def has_repo? url
+    !(repositories.where(url: url).empty?)
   end
 
 end

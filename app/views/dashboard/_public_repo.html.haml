@@ -1,7 +1,12 @@
 %tr
-  %td= repo[:name]
-  %td= repo[:url]
+  %td#name=         repo[:name]
+  %td#url(hidden)=  repo[:url]
+  %td#id(hidden)=   repo[:id]
   %td
     .btn-group
-      %a.js-on.btn.btn-default On
-      %a.js-off.btn.btn-default.activk Off
+      - if repo_active?(repo[:url])
+        %a.js-on.btn.btn-default.active    On
+        %a.js-off.btn.btn-default.inactive Off
+      - else
+        %a.js-on.btn.btn-default.inactive On
+        %a.js-off.btn.btn-default.active  Off

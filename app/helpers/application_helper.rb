@@ -8,4 +8,8 @@ module ApplicationHelper
     end
   end
 
+  def repo_active?  url
+    current_user.has_repo? url
+  end
+
 end

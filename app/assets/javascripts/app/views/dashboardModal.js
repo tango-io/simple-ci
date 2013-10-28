@@ -55,8 +55,7 @@ simpleCI.Views.dashboardModal = Backbone.View.extend({
 
   saveRepos: function(){
     window.location.reload();
-  }
-
+  },
 
 });
 

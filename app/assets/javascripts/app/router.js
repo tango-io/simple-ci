@@ -13,7 +13,6 @@ simpleCI.Router = Backbone.Router.extend ({
 
   dashboardPage: function(){
     this.reposModal = new simpleCI.Views.dashboardModal();
-    this.localRepos= new simpleCI.Views.dashboardLocalRepos();
   }
 
 })

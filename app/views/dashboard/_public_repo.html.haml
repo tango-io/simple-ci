@@ -4,5 +4,9 @@
   %td#id(hidden)=   repo[:id]
   %td
     .btn-group
-      %a.js-on.btn.btn-default.active{ class: "#{repo_active_class(url)}"}    On
-      %a.js-off.btn.btn-default.inactive{ class: "#{repo_active_class(url)}"} Off
+      - if repo_active?(repo[:url])
+        %a.js-on.btn.btn-default.active    On
+        %a.js-off.btn.btn-default.inactive Off
+      - else
+        %a.js-on.btn.btn-default.inactive  On
+        %a.js-off.btn.btn-default.active   Off

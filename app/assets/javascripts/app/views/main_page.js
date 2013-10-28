@@ -171,11 +171,12 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   renderHomePage: function(){
-    var $header = this.$el.find('.container.content')
+    var $header = this.$el.find('header')
+    var $container = this.$el.find('.container.content')
     $header.removeClass('red');
-    this.hideScriptStage($header);
+    this.hideScriptStage($container);
     this.showMainPageElements();
-    this.restoreGithubURLInput($header);
+    this.restoreGithubURLInput($container);
   },
 
   restoreGithubURLInput: function(target){

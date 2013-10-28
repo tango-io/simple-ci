@@ -109,7 +109,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   renderScriptTemplate: function(target){
     var scriptTemplate = _.template(JST['templates/script_template']());
     this.$el.find('header').addClass('red');
-    if ($('input').length > 0) {
+    if ($('.content input').length > 0) {
       target.find('input').replaceWith(scriptTemplate);
     }else{
       target.find('.console').replaceWith(scriptTemplate);

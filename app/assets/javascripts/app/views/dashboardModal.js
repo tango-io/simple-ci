@@ -6,7 +6,7 @@ simpleCI.Views.dashboardModal = Backbone.View.extend({
   events: {
     'click .js-on.inactive'  : 'addRepo',
     'click .js-off.inactive' : 'removeRepo',
-    'click #save'            : 'saveRepos'
+    'click #save'            : 'saveRepos',
   },
 
   addRepo: function(e){
@@ -26,7 +26,7 @@ simpleCI.Views.dashboardModal = Backbone.View.extend({
 
     request.done(function(response){
       self.model = {};
-      toggleButtons(parent, 'active', 'inactive');
+      self.toggleButtons(parent, 'active', 'inactive');
     });
 
     request.error(function(response){
@@ -43,7 +43,7 @@ simpleCI.Views.dashboardModal = Backbone.View.extend({
     }), self = this;
 
     request.done(function(response){
-      toggleButtons(parent, 'inactive', 'active');
+      self.toggleButtons(parent, 'inactive', 'active');
     });
 
     request.error(function(response){
@@ -54,9 +54,7 @@ simpleCI.Views.dashboardModal = Backbone.View.extend({
     window.location.reload();
   },
 
-});
-
-function toggleButtons(parent, toggle1, toggle2){
+ toggleButtons: function(parent, toggle1, toggle2){
 
   parent.find('.js-on').addClass(toggle1);
   parent.find('.js-on').removeClass(toggle2);
@@ -65,3 +63,5 @@ function toggleButtons(parent, toggle1, toggle2){
   parent.find('.js-off').removeClass(toggle1);
 
 }
+
+});

@@ -5,7 +5,7 @@ class CreateRepositories < ActiveRecord::Migration
       t.string  :name
       t.string  :url
       t.integer :user_id
-      t.boolean :activated
+      t.boolean :activated, default: false
 
       t.timestamps
     end

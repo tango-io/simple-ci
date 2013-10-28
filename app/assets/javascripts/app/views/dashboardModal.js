@@ -1,9 +1,6 @@
 simpleCI.Views.dashboardModal = Backbone.View.extend({
   el: '#add-repos-modal',
 
-  initialize: function(){
-  },
-
   model: {},
 
   events: {

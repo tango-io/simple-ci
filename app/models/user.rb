@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def has_repo? url
-    !(repositories.where(url: url).empty?)
+    !!repositories.find_by(url: url)
   end
 
 end

@@ -1,9 +1,4 @@
 class RepositoriesController < ApplicationController
-  #decent_configuration(:finder) do
-  #  finder :find_by_uid
-  #  finder_parameter :id
-  #end
-
   expose(:repository, attributes: :repository_params, finder: :find_by_uid)
   expose(:repositories){ current_user.repositories }
 

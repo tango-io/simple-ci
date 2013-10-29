@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20131025183640) do
   end
 
   create_table "repositories", force: true do |t|
-    t.string   "uid"
+    t.integer  "uid"
     t.string   "name"
     t.string   "url"
     t.integer  "user_id"

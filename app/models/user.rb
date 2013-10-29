@@ -21,16 +21,11 @@ class User < ActiveRecord::Base
     repos = open("https://api.github.com/users/#{nickname}/repos").read
     repos = JSON.parse(repos)
     repos.map do |repo|
-      {
-        id:   repo['id'],
+      Repository.find_or_initialize_by(
+        uid:   repo['id'],
         name: repo['name'],
-        url:  repo['url']
-      }
+        url:  repo['url'])
     end
-  end
-
-  def has_repo? url
-    !!repositories.find_by(url: url)
   end
 
 end

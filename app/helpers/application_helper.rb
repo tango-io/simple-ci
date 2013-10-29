@@ -8,8 +8,8 @@ module ApplicationHelper
     end
   end
 
-  def repo_active?(url)
-    current_user.has_repo?(url)
+  def button_classes active
+    active ? ['active', 'inactive'] : ['inactive', 'active']
   end
 
 end

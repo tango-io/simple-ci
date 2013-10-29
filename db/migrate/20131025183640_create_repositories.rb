@@ -1,7 +1,7 @@
 class CreateRepositories < ActiveRecord::Migration
   def change
     create_table :repositories do |t|
-      t.string  :uid
+      t.integer :uid
       t.string  :name
       t.string  :url
       t.integer :user_id

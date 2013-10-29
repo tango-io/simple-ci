@@ -1,6 +1,9 @@
 simpleCI.Views.dashboardModal = Backbone.View.extend({
   el: '#add-repos-modal',
 
+  initialize: function(){
+  },
+
   model: {},
 
   events: {
@@ -15,7 +18,7 @@ simpleCI.Views.dashboardModal = Backbone.View.extend({
     var url = parent.find('#url').text();
     var id = parent.find('#id').text();
 
-    this.model = { name: name, url: url, uid: id };
+    this.model = { name: name, url: url, uid: id, activated: true };
 
     var request = $.ajax({
       type: 'post',
@@ -25,8 +28,11 @@ simpleCI.Views.dashboardModal = Backbone.View.extend({
     }), self = this;
 
     request.done(function(response){
-      self.model = {};
       self.toggleButtons(parent, 'active', 'inactive');
+      var template = _.template($('#repo-template').html(),
+      ( {repo: self.model} ) );
+      $('.dashboard table tbody').append(template);
+      self.model = {};
     });
 
     request.error(function(response){
@@ -44,14 +50,11 @@ simpleCI.Views.dashboardModal = Backbone.View.extend({
 
     request.done(function(response){
       self.toggleButtons(parent, 'inactive', 'active');
+      $('.dashboard table tbody').find('#'+id).remove();
     });
 
     request.error(function(response){
     });
-  },
-
-  saveRepos: function(){
-    window.location.reload();
   },
 
  toggleButtons: function(parent, toggle1, toggle2){

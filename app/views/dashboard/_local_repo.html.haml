@@ -1,3 +1,2 @@
-%tr{ class: "#{['active', 'success', 'warning', 'danger'].sample}" }
-  %td=         repo.name
-  %td#uid(hidden)= repo.uid
+%tr(id="#{repo.uid}")
+  %td= repo.name

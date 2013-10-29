@@ -4,4 +4,6 @@
   %td#id(hidden)=   repo.uid
   %td
     .btn-group
-      = render partial: 'button_link', locals: { btn_classes: button_classes(repo.activated) }
+      - classes = button_classes(repo.activated)
+      %a.js-on.btn.btn-default{class:  classes[0]} On
+      %a.js-off.btn.btn-default{class: classes[1]} Off

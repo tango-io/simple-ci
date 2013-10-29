@@ -20,6 +20,8 @@
 //= require_tree ./app/views
 //= require bootstrap
 
+_.templateSettings = {  interpolate :/\{\{(.+?)\}\}/g }
+
 $(function(){
   simpleCI.initialize();
 })

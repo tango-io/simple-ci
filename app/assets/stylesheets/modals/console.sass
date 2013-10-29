@@ -1,34 +1,33 @@
 .container.content
+
   .form-control.console
+    margin-top: 35px
+    
     .remove-console
-      opacity: 0
-      transition: opacity 1s linear
-      -webkit-transition: opacity 1s linear
       cursor: pointer
       background: image-url('close-white.png') no-repeat right
       height: 22px
       background-size: 22px
 
   .console
-    width: 70%
     height: 500px
 
-    .run
-      height: 90%
-      resize: none
-      width: 100%
-      overflow-x: hidden
-      text-align: left
+  & .run
+    height: 90%
+    resize: none
+    width: 100%
+    overflow-x: hidden
+    text-align: left
 
-    .run, .remove-console
-      opacity: 1 !important
-      -webkit-transition: opacity 1s linear .5s !important
+  & .run, .remove-console
+    opacity: 1 !important
+    -webkit-transition: opacity 1s linear .5s !important
 
-    .run span
-      display: block
+  & .run span
+    display: block
 
-    .run span.inline
-      display: inline
+  & .run span.inline
+    display: inline
 
   .console .run, .console
     background-color: #202020
@@ -36,7 +35,6 @@
     display: block
     font-family: monaco
     font-size: 14px
-    top: 50px !important
+    position: static
     opacity: 1 !important
     -webkit-transition: opacity 1s linear !important
-    z-index: 1

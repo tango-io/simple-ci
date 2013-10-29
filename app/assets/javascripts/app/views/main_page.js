@@ -109,7 +109,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   renderScriptTemplate: function(target){
     var scriptTemplate = _.template(JST['templates/script_template']());
     this.$el.find('header').addClass('red');
-    if ($('input').length > 0) {
+    if ($('.content input').length > 0) {
       target.find('input').replaceWith(scriptTemplate);
     }else{
       target.find('.console').replaceWith(scriptTemplate);
@@ -171,11 +171,12 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   },
 
   renderHomePage: function(){
-    var $header = this.$el.find('.container.content')
+    var $header = this.$el.find('header')
+    var $container = this.$el.find('.container.content')
     $header.removeClass('red');
-    this.hideScriptStage($header);
+    this.hideScriptStage($container);
     this.showMainPageElements();
-    this.restoreGithubURLInput($header);
+    this.restoreGithubURLInput($container);
   },
 
   restoreGithubURLInput: function(target){

@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'spork'
 require 'omniauth'
+require 'capybara/rspec'
+
 OmniAuth.config.test_mode = true
 
 

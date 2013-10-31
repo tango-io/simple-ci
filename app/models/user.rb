@@ -22,9 +22,10 @@ class User < ActiveRecord::Base
     repos = JSON.parse(repos)
     repos.map do |repo|
       Repository.find_or_initialize_by(
-        uid:   repo['id'],
+        uid:  repo['id'],
         name: repo['name'],
-        url:  repo['url'])
+        url:  repo['url']
+      )
     end
   end
 

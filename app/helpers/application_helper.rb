@@ -8,4 +8,8 @@ module ApplicationHelper
     end
   end
 
+  def button_classes active
+    active ? ['active', 'inactive'] : ['inactive', 'active']
+  end
+
 end

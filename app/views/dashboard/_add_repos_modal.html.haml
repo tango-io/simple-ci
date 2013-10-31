@@ -1,0 +1,16 @@
+#add-repos-modal.modal.fade.in(tabindex="-1" role="dialog" aria-labelledby="addReposModal" aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4.modal-title Add repositories
+      .modal-body
+        %table.table
+          %thead
+            %tr
+              %th name
+              %th add to CI repositories
+          %tbody
+            = render partial: 'public_repo', collection: github_repos, as: 'repo'
+      .modal-footer
+        %button.btn.btn-info{"data-dismiss" => "modal", type: "button"} Close

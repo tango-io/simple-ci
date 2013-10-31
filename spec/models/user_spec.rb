@@ -50,7 +50,8 @@ describe User do
           url:  repo['url'])
       end
       user.stub_chain(:open, :read).and_return(repos.to_json)
-      expect(user.public_repositories).to eq(objects)
+      expect(user.public_repositories.first.name).to eq(objects.first.name)
+      expect(user.public_repositories.count).to eq(objects.count)
     end
 
   end

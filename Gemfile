@@ -31,6 +31,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rack_session_access'
   gem 'guard', '1.8.2'
   gem 'guard-rspec', '3.0.2'
   gem 'guard-spork', '1.5.1'

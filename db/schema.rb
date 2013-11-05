@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131025183640) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20131105003743) do
 
   create_table "jobs", force: true do |t|
     t.text     "session_id"
@@ -29,11 +26,18 @@ ActiveRecord::Schema.define(version: 20131025183640) do
     t.integer  "uid"
     t.string   "name"
     t.string   "url"
-    t.integer  "user_id"
     t.boolean  "activated",  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "repositories_users", id: false, force: true do |t|
+    t.integer "repository_id"
+    t.integer "user_id"
+  end
+
+  add_index "repositories_users", ["repository_id"], name: "index_repositories_users_on_repository_id", using: :btree
+  add_index "repositories_users", ["user_id"], name: "index_repositories_users_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "uid"

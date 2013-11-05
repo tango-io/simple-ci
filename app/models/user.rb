@@ -28,4 +28,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  def add_repository(repository)
+    self.repositories.push(repository)
+  end
 end

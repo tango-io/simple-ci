@@ -31,4 +31,5 @@ class User < ActiveRecord::Base
   def add_repository(repository)
     self.repositories.push(repository)
   end
+
 end

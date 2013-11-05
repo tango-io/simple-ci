@@ -23,9 +23,9 @@ feature 'dashboard' do
     Fabricate(
       :repository,
       uid: user.uid,
-      name: Faker::Internet.user_name,
+      name: Faker::Internet.domain_word,
       url: Faker::Internet.url,
-      user_id: user.id
+      activated: true
     )
   end
 
@@ -36,19 +36,20 @@ feature 'dashboard' do
       :repository,
       uid: user.uid,
       name: Faker::Internet.domain_word,
-      url: Faker::Internet.url,
-      user_id: user.id
+      url: Faker::Internet.url
     )
   end
 
   def public_repositories
     repositories = []
+    repositories << repository
     5.times { repositories << public_repo }
     repositories
   end
 
   before do
     User.any_instance.stub(:public_repositories).and_return(repository_list)
+    user.repositories.push(repository)
     page.set_rack_session(:user_id => user.id)
     visit dashboard_index_path
   end
@@ -66,5 +67,15 @@ feature 'dashboard' do
     end
     visit dashboard_index_path
     find("##{repo.name}")
+  end
+
+  scenario 'delete repository', :js do
+    click_link 'add repositories'
+    within('#add-repos-modal') do
+      find("#off_#{repository.name}").click
+      click_button 'Close'
+    end
+    visit dashboard_index_path
+    page.should_not have_content(repository.name)
   end
 end

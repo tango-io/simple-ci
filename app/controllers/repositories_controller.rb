@@ -5,7 +5,7 @@ class RepositoriesController < ApplicationController
   def create
     current_user.add_repository(repository)
     respond_to do |format|
-      if repository.stored?
+      if repository.save
         format.json {render status: :ok, json: { message: 'Successfully added repository' } }
       else
         format.json {render status: :unproccesable_entity, json: { message: 'Can not add the repository' } }
@@ -15,7 +15,7 @@ class RepositoriesController < ApplicationController
 
   def destroy
     respond_to do |format|
-      if repository.delete_user(current_user)
+      if repository.destroy
         format.json {render status: :ok, json: { message: 'Successfully deleted repository' } }
       else
         format.json {render status: :unproccesable_entity, json: { message: 'Can not delete the repository' } }

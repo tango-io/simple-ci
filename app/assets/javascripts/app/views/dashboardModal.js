@@ -6,7 +6,6 @@ simpleCI.Views.dashboardModal = Backbone.View.extend({
   events: {
     'click .js-on.inactive'  : 'addRepo',
     'click .js-off.inactive' : 'removeRepo',
-    'click #save'            : 'saveRepos',
   },
 
   addRepo: function(e){
@@ -26,10 +25,9 @@ simpleCI.Views.dashboardModal = Backbone.View.extend({
 
     request.done(function(response){
       self.toggleButtons(parent, 'active', 'inactive');
-      var template = _.template($('#repo-template').html(),
-                                ( {repo: self.model} ) );
-                                $('.dashboard table tbody').append(template);
-                                self.model = {};
+      var template = _.template($('#repo-template').html(), ( {repo: self.model} ) );
+      $('.dashboard table tbody').append(template);
+      self.model = {};
     });
 
     request.error(function(response){

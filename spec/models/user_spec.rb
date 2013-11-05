@@ -7,7 +7,7 @@ describe User do
     it { should validate_presence_of(:uid)      }
     it { should validate_presence_of(:provider) }
     it { should validate_presence_of(:nickname) }
-
+    it { should have_and_belong_to_many(:repositories) }
     it { should validate_uniqueness_of(:uid)      }
     it { should validate_uniqueness_of(:nickname) }
   end

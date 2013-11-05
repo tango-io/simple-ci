@@ -2,9 +2,9 @@ require 'spec_helper'
 
 feature 'dashboard' do
 
-  let(:auth) do
+  def github_auth
     {
-      'uid' => '1337',
+      'uid' => Random.new.rand(9999).to_s,
       'provider' => 'github',
       'info' => {
         'name' => Faker::Name.name,
@@ -13,16 +13,18 @@ feature 'dashboard' do
     }
   end
 
-  let(:user) do
-    user = User.build_from_omniauth auth
+  def create_user
+    user = User.build_from_omniauth github_auth
     user.save
     user
   end
 
-  let!(:repository) do
+  let(:foo) { create_user }
+
+  let!(:foo_repository) do
     Fabricate(
       :repository,
-      uid: user.uid,
+      uid: foo.uid,
       name: Faker::Internet.domain_word,
       url: Faker::Internet.url,
       activated: true
@@ -34,7 +36,7 @@ feature 'dashboard' do
   def public_repo
     Fabricate.build(
       :repository,
-      uid: user.uid,
+      uid: foo.uid,
       name: Faker::Internet.domain_word,
       url: Faker::Internet.url
     )
@@ -42,20 +44,20 @@ feature 'dashboard' do
 
   def public_repositories
     repositories = []
-    repositories << repository
+    repositories << foo_repository
     5.times { repositories << public_repo }
     repositories
   end
 
   before do
     User.any_instance.stub(:public_repositories).and_return(repository_list)
-    user.repositories.push(repository)
-    page.set_rack_session(:user_id => user.id)
+    foo.repositories.push(foo_repository)
+    page.set_rack_session(:user_id => foo.id)
     visit dashboard_index_path
   end
 
   scenario 'load previously added repositories ' do
-    find("tr[@id='#{repository.name}']")
+    find("tr[@id='#{foo_repository.name}']")
   end
 
   scenario 'add new repository', :js do
@@ -72,10 +74,10 @@ feature 'dashboard' do
   scenario 'delete repository', :js do
     click_link 'add repositories'
     within('#add-repos-modal') do
-      find("#off_#{repository.name}").click
+      find("#off_#{foo_repository.name}").click
       click_button 'Close'
     end
     visit dashboard_index_path
-    page.should_not have_content(repository.name)
+    page.should_not have_content(foo_repository.name)
   end
 end

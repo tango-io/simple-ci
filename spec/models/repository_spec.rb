@@ -22,7 +22,9 @@ describe Repository do
     }
 
     it 'hooks_url return an url og github API' do
-     repository.send(:hooks_url).should eq("https://api.github.com/repos/#{user.nickname}/#{repository.name}/hooks")
+     repository.send(:hooks_url).should eq(
+       "https://api.github.com/repos/#{user.nickname}/#{repository.name}/hooks"
+     )
     end
 
     it 'subscribe_hooks add the hook_id to the repository before create' do

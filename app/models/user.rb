@@ -13,7 +13,9 @@ class User < ActiveRecord::Base
       uid:      auth['uid'],
       provider: auth['provider'],
       name:     auth['info']['name'],
-      nickname: auth['info']['nickname']
+      nickname: auth['info']['nickname'],
+      email:    auth['info']['email'],
+      github_token: auth['credentials']['token']
     )
   end
 

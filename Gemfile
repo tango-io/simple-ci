@@ -18,7 +18,8 @@ gem 'pusher'
 gem 'decent_exposure'
 gem 'net-ssh'
 gem 'ejs'
-gem "omniauth-github", '1.1.1'
+gem 'omniauth-github', '1.1.1'
+gem 'httparty'
 
 group :doc do
   gem 'sdoc', require: false

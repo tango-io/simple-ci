@@ -29,7 +29,8 @@ describe SessionsController do
         'info' => {
           'name' => nil,
           'nickname' => nil
-        }
+        },
+        'credentials' => { 'token' => nil}
       }
     })
     get :create, provider: 'github'

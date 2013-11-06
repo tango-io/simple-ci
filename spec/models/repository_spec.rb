@@ -11,6 +11,7 @@ describe Repository do
     it { should validate_presence_of(:user_id) }
     it { should validate_uniqueness_of(:url) }
   end
+
   context 'methods' do
     let(:user){ Fabricate :user}
     let(:repository){
@@ -21,7 +22,28 @@ describe Repository do
     }
 
     it 'hooks_url return an url og github API' do
-     repository.hooks_url.should eq("https://api.github.com/repos/#{user.nickname}/#{repository.name}/hooks")
+     repository.send(:hooks_url).should eq("https://api.github.com/repos/#{user.nickname}/#{repository.name}/hooks")
+    end
+
+    it 'subscribe_hooks add the hook_id to the repository before create' do
+      hook_id = '123456'
+      repository.stub(:subscribe_hooks).and_return(repository.hook_id = hook_id)
+      repository.send(:subscribe_hooks)
+      repository.hook_id.should eq(hook_id)
+    end
+
+    it 'subscribe_hooks returns false if the response does not includes the hook_id' do
+      repository.send(:subscribe_hooks).should be_false
+      repository.hook_id.should eq(nil)
+    end
+
+    it 'unsubscribe_hooks returns nil if the repository was unsubscribed' do
+      repository.stub(:unsubscribe_hooks).and_return(nil)
+      repository.send(:unsubscribe_hooks).should eq(nil)
+    end
+
+    it 'unsubscribe_hooks returns false if the repository was not unsubscribed' do
+      repository.send(:unsubscribe_hooks).should be_false
     end
   end
 end

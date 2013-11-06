@@ -2,6 +2,11 @@ require 'spec_helper'
 
 feature 'dashboard' do
 
+  before :each do
+    Repository.skip_callback(:create, :before, :subscribe_hooks)
+    Repository.skip_callback(:destroy, :before, :unsubscribe_hooks)
+  end
+
   let(:auth) do
     {
       'uid' => '1337',
@@ -9,7 +14,8 @@ feature 'dashboard' do
       'info' => {
         'name' => Faker::Name.name,
         'nickname' => Faker::Internet.user_name
-      }
+      },
+      'credentials' => { 'token' => '1234567890000000098765432' }
     }
   end
 
@@ -25,7 +31,8 @@ feature 'dashboard' do
       uid: user.uid,
       name: Faker::Internet.user_name,
       url: Faker::Internet.url,
-      user_id: user.id
+      user_id: user.id,
+      hook_id: Random.new.rand(1..999999)
     )
   end
 
@@ -37,7 +44,8 @@ feature 'dashboard' do
       uid: user.uid,
       name: Faker::Internet.domain_word,
       url: Faker::Internet.url,
-      user_id: user.id
+      user_id: user.id,
+      hook_id: Random.new.rand(1..999999)
     )
   end
 

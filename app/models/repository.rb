@@ -20,6 +20,8 @@ class Repository < ActiveRecord::Base
     }
   }.to_json
 
+  private
+
   def hooks_url
     "https://api.github.com/repos/#{user.nickname}/#{name}/hooks"
   end

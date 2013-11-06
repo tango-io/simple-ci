@@ -1,15 +1,15 @@
 development:
   adapter:  postgresql
   database: simple_ci_dev
-  username: oscardev
-  password: 123456
+  username: dev
+  password: dev
   host:     localhost
 
 test:
   adapter:  postgresql
   database: simple_ci_test
-  username: oscardev
-  password: 123456
+  username: dev
+  password: dev
   host:     localhost
 
 production:

@@ -23,11 +23,7 @@ feature 'dashboard' do
     )
   end
 
-  let(:user) do
-    user = User.build_from_omniauth auth
-    user.save
-    user
-  end
+  let(:user) { User.build_from_omniauth auth }
 
   let(:repository_list) { public_repositories }
 
@@ -49,6 +45,7 @@ feature 'dashboard' do
 
   before do
     User.any_instance.stub(:public_repositories).and_return(repository_list)
+    user.save
     user.repositories.push(repository)
     page.set_rack_session(:user_id => user.id)
     visit dashboard_index_path
@@ -70,6 +67,7 @@ feature 'dashboard' do
   end
 
   scenario 'delete repository', :js do
+    page.should have_content(repository.name)
     click_link 'add repositories'
     within('#add-repos-modal') do
       find("#off_#{repository.name}").click

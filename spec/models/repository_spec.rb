@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe Repository do
   context 'validations' do
+    before :each do
+      Repository.skip_callback(:create, :before, :subscribe_hooks)
+      Repository.skip_callback(:destroy, :before, :unsubscribe_hooks)
+    end
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:url) }
     it { should validate_presence_of(:user_id) }

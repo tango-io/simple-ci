@@ -4,4 +4,5 @@ class DashboardController < ApplicationController
   expose(:user) { current_user }
   expose(:github_repos) { current_user.public_repositories }
   expose(:local_repos) { current_user.repositories }
+
 end

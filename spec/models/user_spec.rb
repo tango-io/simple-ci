@@ -27,10 +27,22 @@ describe User do
 
     let(:repos) do
       [
-        { 'name' => Faker::Lorem.sentence },
-        { 'name' => Faker::Lorem.sentence },
-        { 'name' => Faker::Lorem.sentence },
-        { 'name' => Faker::Lorem.sentence }
+        {
+          'name' => Faker::Lorem.sentence,
+          'url'  => Faker::Internet.url
+        },
+        {
+          'name' => Faker::Lorem.sentence,
+          'url'  => Faker::Internet.url
+        },
+        {
+          'name' => Faker::Lorem.sentence,
+          'url'  => Faker::Internet.url
+        },
+        {
+          'name' => Faker::Lorem.sentence,
+          'url'  => Faker::Internet.url
+        }
       ]
     end
 

@@ -21,7 +21,8 @@ describe User do
         'info' => {
           'name' => Faker::Name.name,
           'nickname' => Faker::Internet.user_name
-        }
+        },
+        'credentials' => { 'token' => '12345678900123456745678'}
       }
     end
 

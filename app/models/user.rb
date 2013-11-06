@@ -10,12 +10,12 @@ class User < ActiveRecord::Base
 
   def self.build_from_omniauth auth
     find_or_initialize_by(
-      uid:      auth.uid,
-      provider: auth.provider,
-      name:     auth.info.name,
-      nickname: auth.info.nickname,
-      email:    auth.info.email,
-      github_token: auth.credentials.token
+      uid:      auth['uid'],
+      provider: auth['provider'],
+      name:     auth['info']['name'],
+      nickname: auth['info']['nickname'],
+      email:    auth['info']['email'],
+      github_token: auth['credentials']['token']
     )
   end
 

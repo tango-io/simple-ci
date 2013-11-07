@@ -21,7 +21,7 @@ describe Repository do
         user_id: user.id)
     }
 
-    it 'hooks_url return an url og github API' do
+    it 'hooks_url returns an url of github API' do
      repository.send(:hooks_url).should eq(
        "/repos/#{user.nickname}/#{repository.name}/hooks"
      )

@@ -3,9 +3,8 @@ class RepositoriesController < ApplicationController
   expose(:repositories){ current_user.repositories }
 
   def create
-    current_user.add_repository(repository)
     respond_to do |format|
-      if repository.save
+      if current_user.add_repository(repository)
         format.json {render status: :ok, json: { message: 'Successfully added repository' } }
       else
         format.json {render status: :unproccesable_entity, json: { message: 'Can not add the repository' } }

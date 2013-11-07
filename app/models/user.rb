@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
     repos = open("https://api.github.com/users/#{nickname}/repos").read
     repos = JSON.parse(repos)
     repos.map do |repo|
-      self.add_repository(repo) unless Repository.find_by_url(repo['url']).nil?
       Repository.find_or_initialize_by(
         uid:  repo['id'],
         name: repo['name'],
@@ -30,7 +29,8 @@ class User < ActiveRecord::Base
   end
 
   def add_repository(repository)
-    self.repositories.push(repository)
+    self.repositories << repository
+    self.save
   end
 
 end

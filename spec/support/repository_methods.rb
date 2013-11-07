@@ -1,15 +1,21 @@
-def public_repo
-  Fabricate.build(
-    :repository,
-    uid: user.uid,
-    name: Faker::Internet.domain_word,
-    url: Faker::Internet.url,
-  )
+def repo
+  {
+    'name' => Faker::Lorem.sentence,
+    'url'  => Faker::Internet.url
+  }
 end
 
-def public_repositories
+def repositories
   repositories = []
-  repositories << repository
-  5.times { repositories << public_repo }
+  5.times { repositories << repo }
   repositories
+end
+
+def initialize_repositories(repos)
+  repos.map do |repo|
+    Repository.find_or_initialize_by(
+      uid:   repo['id'],
+      name: repo['name'],
+      url:  repo['url'])
+  end
 end

@@ -10,9 +10,9 @@ class RepositoriesController < ApplicationController
           render status: :ok, json: { message: 'Successfully added repository' }
         end
       else
-        format.json {
+        format.json do
           render status: :unproccesable_entity, json: { message: 'Can not add the repository' }
-        }
+        end
       end
     end
   end

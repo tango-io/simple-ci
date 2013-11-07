@@ -19,6 +19,12 @@ SimpleCI::Application.routes.draw do
     end
   end
 
+  resources :hooks, only: :index do
+    collection do
+      post :github
+    end
+  end
+
   namespace :api do
     resources :workers, only: [:index]
   end

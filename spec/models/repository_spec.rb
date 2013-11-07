@@ -23,7 +23,7 @@ describe Repository do
 
     it 'hooks_url return an url og github API' do
      repository.send(:hooks_url).should eq(
-       "https://api.github.com/repos/#{user.nickname}/#{repository.name}/hooks"
+       "/repos/#{user.nickname}/#{repository.name}/hooks"
      )
     end
 

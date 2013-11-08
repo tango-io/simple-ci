@@ -1,6 +1,6 @@
 def repo
   {
-    'name' => Faker::Lorem.sentence,
+    'name' => Faker::Internet.domain_word,
     'url'  => Faker::Internet.url
   }
 end

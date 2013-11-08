@@ -19,3 +19,9 @@ def initialize_repositories(repos)
       url:  repo['url'])
   end
 end
+
+
+def add_repository(user, repository)
+  repo = Repository.find_by_url(repository.url)
+  user.repositories.push(repo)
+end

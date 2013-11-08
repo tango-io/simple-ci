@@ -9,12 +9,15 @@ class User < ActiveRecord::Base
   validates_inclusion_of :provider, in: %w(github)
 
   def self.build_from_omniauth auth
-    find_or_initialize_by(
+    user = find_or_initialize_by(
       uid:      auth['uid'],
       provider: auth['provider'],
       name:     auth['info']['name'],
-      nickname: auth['info']['nickname']
+      nickname: auth['info']['nickname'],
+      email:    auth['info']['email'],
     )
+    user.github_token =  auth['credentials']['token']
+    user
   end
 
   def public_repositories

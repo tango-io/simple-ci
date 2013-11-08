@@ -10,7 +10,8 @@ describe SessionsController do
         'info' => {
           'name' => Faker::Name.name,
           'nickname' => Faker::Internet.user_name
-        }
+        },
+        'credentials' => { 'token' => '1234567890098765432' }
       }
     })
   end
@@ -28,7 +29,8 @@ describe SessionsController do
         'info' => {
           'name' => nil,
           'nickname' => nil
-        }
+        },
+        'credentials' => { 'token' => nil}
       }
     })
     get :create, provider: 'github'

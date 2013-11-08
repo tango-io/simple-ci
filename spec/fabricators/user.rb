@@ -3,4 +3,5 @@ Fabricator :user do
   name 'Cesar Gomez'
   nickname 'cesargomez89'
   provider 'github'
+  github_token '1234567899999999876543'
 end

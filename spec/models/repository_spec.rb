@@ -22,7 +22,7 @@ describe Repository do
     }
 
     it 'hooks_url returns an url of github API' do
-     repository.send(:hooks_url).should eq(
+     expect(repository.send(:hooks_url)).to eq(
        "/repos/#{user.nickname}/#{repository.name}/hooks"
      )
     end
@@ -31,21 +31,21 @@ describe Repository do
       hook_id = '123456'
       repository.stub(:subscribe_hooks).and_return(repository.hook_id = hook_id)
       repository.send(:subscribe_hooks)
-      repository.hook_id.should eq(hook_id)
+      expect(repository.hook_id).to eq(hook_id)
     end
 
     it 'subscribe_hooks returns false if the response does not includes the hook_id' do
-      repository.send(:subscribe_hooks).should be_false
-      repository.hook_id.should eq(nil)
+      expect(repository.send(:subscribe_hooks)).to be_false
+      expect(repository.hook_id).to eq(nil)
     end
 
     it 'unsubscribe_hooks returns true if the repository was unsubscribed' do
       repository.stub(:unsubscribe_hooks).and_return(true)
-      repository.send(:unsubscribe_hooks).should eq(true)
+      expect(repository.send(:unsubscribe_hooks)).to eq(true)
     end
 
     it 'unsubscribe_hooks returns false if the repository was not unsubscribed' do
-      repository.send(:unsubscribe_hooks).should be_false
+      expect(repository.send(:unsubscribe_hooks)).to be_false
     end
   end
 end

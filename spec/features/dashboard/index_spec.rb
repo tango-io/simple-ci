@@ -2,53 +2,24 @@ require 'spec_helper'
 
 feature 'dashboard' do
 
-  let(:auth) do
-    {
-      'uid' => '1337',
-      'provider' => 'github',
-      'info' => {
-        'name' => Faker::Name.name,
-        'nickname' => Faker::Internet.user_name
-      }
-    }
-  end
-
-  let(:user) do
-    user = User.build_from_omniauth auth
-    user.save
-    user
-  end
-
-  let!(:repository) do
+  let(:repository) do
     Fabricate(
-      :repository,
-      uid: user.uid,
-      name: Faker::Internet.user_name,
-      url: Faker::Internet.url,
-      user_id: user.id
-    )
-  end
-
-  let(:repository_list) { public_repositories }
-
-  def public_repo
-    Fabricate.build(
       :repository,
       uid: user.uid,
       name: Faker::Internet.domain_word,
       url: Faker::Internet.url,
-      user_id: user.id
+      activated: true
     )
   end
 
-  def public_repositories
-    repositories = []
-    5.times { repositories << public_repo }
-    repositories
-  end
+  let(:user) { create_user(auth) }
+
+  let(:repository_list) { initialize_repositories(repositories) }
 
   before do
+    repository_list << repository
     User.any_instance.stub(:public_repositories).and_return(repository_list)
+    user.repositories.push(repository)
     page.set_rack_session(:user_id => user.id)
     visit dashboard_index_path
   end
@@ -67,4 +38,16 @@ feature 'dashboard' do
     visit dashboard_index_path
     find("##{repo.name}")
   end
+
+  scenario 'delete repository', :js do
+    page.should have_content(repository.name)
+    click_link 'add repositories'
+    within('#add-repos-modal') do
+      find("#off_#{repository.name}").click
+      click_button 'Close'
+    end
+    visit dashboard_index_path
+    page.should_not have_content(repository.name)
+  end
+
 end

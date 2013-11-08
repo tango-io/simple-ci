@@ -1,8 +1,7 @@
 require 'open-uri'
 
 class User < ActiveRecord::Base
-
-  has_many :repositories
+  has_and_belongs_to_many :repositories
 
   validates :name, :uid, :provider, :nickname, presence: true
   validates :uid, :nickname, uniqueness: true
@@ -27,6 +26,11 @@ class User < ActiveRecord::Base
         url:  repo['url']
       )
     end
+  end
+
+  def add_repository(repository)
+    self.repositories << repository
+    self.save
   end
 
 end

@@ -39,9 +39,9 @@ describe Repository do
       repository.hook_id.should eq(nil)
     end
 
-    it 'unsubscribe_hooks returns nil if the repository was unsubscribed' do
-      repository.stub(:unsubscribe_hooks).and_return(nil)
-      repository.send(:unsubscribe_hooks).should eq(nil)
+    it 'unsubscribe_hooks returns true if the repository was unsubscribed' do
+      repository.stub(:unsubscribe_hooks).and_return(true)
+      repository.send(:unsubscribe_hooks).should eq(true)
     end
 
     it 'unsubscribe_hooks returns false if the repository was not unsubscribed' do

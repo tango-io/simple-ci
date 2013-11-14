@@ -13,7 +13,13 @@ class Job < ActiveRecord::Base
   end
 
   def publish(event_type, data)
-    Pusher.trigger(self.session_id, event_type, data)
+    ws = Ci::WebSocket.new
+    ws.publish(
+      channel: self.session_id,
+      data: {
+        message: "started tests for #{self.session_id}"
+      }
+    )
   end
 
   def shell_script

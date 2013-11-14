@@ -1,4 +1,5 @@
 require 'ansi_colors'
+
 module Ci
   class Buffer
 
@@ -7,11 +8,17 @@ module Ci
     def initialize(session_id)
       @session_id = session_id
       @stream = ""
+      @ws = Ci::WebSocket.new
     end
 
     def << (text)
       @stream = AnsiColors.to_html(text)
-      Pusher.trigger @session_id, 'log_update', log: @stream
+      @ws.publish(
+        channel: @session_id,
+        data: {
+          log: @stream
+        }
+      )
     end
 
   end

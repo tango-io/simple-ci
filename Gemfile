@@ -18,6 +18,7 @@ gem 'pusher'
 gem 'decent_exposure'
 gem 'net-ssh'
 gem 'ejs'
+gem 'faye'
 
 group :doc do
   gem 'sdoc', require: false

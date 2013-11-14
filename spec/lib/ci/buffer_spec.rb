@@ -19,6 +19,10 @@ describe Ci::Buffer, 'update buffer' do
   let!(:job)   { Fabricate :job }
   let(:buffer) { Ci::Buffer.new(job.session_id) }
 
+  before do
+    Ci::WebSocket.any_instance.stub(:publish).and_return(true)
+  end
+
   it 'updates the log_output from the job with the buffer of the ssh connection' do
     text = Faker::Lorem.sentence
     buffer << text

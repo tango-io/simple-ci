@@ -11,25 +11,14 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   model: {},
 
   initialize: function(){
-    var sessionId = $('#session_id_').val();
+    var sessionId = $('#session_id_').val()
+    , self = this
+    , client = new Faye.Client('http://localhost:9292/faye');
 
-    var pusher = new Pusher('ed310d3e49f3ba4216a8');
-    var channel = pusher.subscribe(sessionId);
-
-    var self = this;
-
-    channel.bind('job_started', function(data) {
-      console.log(data.message);
+    client.subscribe(sessionId, function(data){
+      console.log(data);
+      //self.updateConsole(data)
     });
-
-    channel.bind('log_update', function(data){
-      self.updateConsole(data)
-    });
-
-    channel.bind('job_ended', function(data) {
-      console.log(data.message);
-    });
-
   },
 
   renderInlineSpan: function(criteria, content){

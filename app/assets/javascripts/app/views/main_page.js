@@ -13,7 +13,7 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
   initialize: function(){
     var sessionId = $('#session_id_').val()
     , self = this
-    , client = new Faye.Client('http://localhost:9292/faye');
+    , client = new Faye.Client('http://simple-ci.r13.railsrumble.com/stream/faye');
 
     client.subscribe("/" + sessionId, function(data){
       self.updateConsole(data)

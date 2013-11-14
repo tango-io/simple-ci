@@ -14,7 +14,7 @@ describe Ci::WebSocket do
   end
 
   it 'has the url for the connection' do
-    expect(ws.uri).to eq(URI.parse('http://simple-ci.r13.railsrumble.com/faye'))
+    expect(ws.uri).to eq(URI.parse('http://simple-ci.r13.railsrumble.com/stream/faye'))
   end
 
   it 'sends a message through the websocket' do

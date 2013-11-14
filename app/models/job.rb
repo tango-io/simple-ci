@@ -17,7 +17,7 @@ class Job < ActiveRecord::Base
     ws.publish(
       channel: self.session_id,
       data: {
-        message: "started tests for #{self.session_id}"
+        log: "started tests for #{self.session_id}"
       }
     )
   end

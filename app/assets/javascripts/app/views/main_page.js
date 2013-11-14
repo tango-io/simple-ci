@@ -15,9 +15,8 @@ simpleCI.Views.mainPage = Backbone.View.extend ({
     , self = this
     , client = new Faye.Client('http://localhost:9292/faye');
 
-    client.subscribe(sessionId, function(data){
-      console.log(data);
-      //self.updateConsole(data)
+    client.subscribe("/" + sessionId, function(data){
+      self.updateConsole(data)
     });
   },
 

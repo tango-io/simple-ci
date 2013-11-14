@@ -3,6 +3,10 @@ require 'spec_helper'
 describe Ci::WebSocket do
   let(:ws) { Ci::WebSocket.new }
 
+  before do
+    Net::HTTP.stub(:post_form).and_return(true)
+  end
+
   it 'initializes the websocket connection' do
     expect {
       Ci::WebSocket.new

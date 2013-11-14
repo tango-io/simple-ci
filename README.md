@@ -14,9 +14,10 @@ bundle exec rails s
 // In another tab
 
 bundle exec sidekiq
-```
 
-You have to create a sandbox subscription (free) to [pusher](http://pusher.com/) and add the keys to a `config/pusher.yml` file.
+// In another tab
+bundle exec rackup websocket.ru
+```
 
 And that's it, you're going to be able to use the application
 

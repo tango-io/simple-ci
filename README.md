@@ -1,5 +1,7 @@
 # Simple-CI
 
+[![Build Status](https://travis-ci.org/tangosource/simple-ci.png?branch=master)](https://travis-ci.org/tangosource/simple-ci)
+[![Coverage Status](https://coveralls.io/repos/tangosource/simple-ci/badge.png)](https://coveralls.io/r/tangosource/simple-ci)
 [![Code Climate](https://codeclimate.com/github/tangosource/simple-ci.png)](https://codeclimate.com/github/tangosource/simple-ci)
 
 A continuous integration tool for github ruby projects

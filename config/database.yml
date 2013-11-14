@@ -1,15 +1,6 @@
-development:
-  adapter:  postgresql
-  database: simple_ci_dev
-  user:     dev
-  password: dev
-
 test:
   adapter:  postgresql
   database: simple_ci_test
-  user:     dev
-  password: dev
 
-production:
-  adapter:  postgresql
-  database: simple_ci_prod
+# Matching environments specified in this file will override the above.
+<%= IO.read('config/database.local.yml') if File.exists?('config/database.local.yml') %>

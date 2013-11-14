@@ -6,19 +6,14 @@ class Job < ActiveRecord::Base
 
   def trigger_job
     RunTestsWorker.perform_async(self.id)
-    publish(
-      'job_started',
-      message: "Started job #{self.id}"
-    )
+    publish(log: "Started job #{self.id}")
   end
 
-  def publish(event_type, data)
+  def publish(data)
     ws = Ci::WebSocket.new
     ws.publish(
       channel: self.session_id,
-      data: {
-        log: "started tests for #{self.session_id}"
-      }
+      data: data
     )
   end
 

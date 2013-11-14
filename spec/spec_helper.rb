@@ -7,6 +7,8 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'sidekiq/testing'
+  require 'coveralls'
+  Coveralls.wear!
 
   RSpec.configure { |c| c.treat_symbols_as_metadata_keys_with_true_values = true  }
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f  }

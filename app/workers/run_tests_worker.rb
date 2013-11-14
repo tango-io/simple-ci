@@ -14,7 +14,7 @@ class RunTestsWorker
     vm.exec("./#{job.session_id}.sh")
     vm.session.close
 
-    job.publish('job_ended', message: 'Build FINISHED')
+    job.publish(log: 'Build FINISHED')
   end
 
 end

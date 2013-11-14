@@ -16,7 +16,7 @@ bundle exec rails s
 bundle exec sidekiq
 
 // In another tab
-bundle exec rackup websocket.ru
+bundle exec rackup websocket.ru -env production
 ```
 
 And that's it, you're going to be able to use the application

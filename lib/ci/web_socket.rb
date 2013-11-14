@@ -1,15 +1,16 @@
+require 'net/http'
+
 class Ci::WebSocket
 
-  attr_reader :url, :client
+  attr_reader :uri, :client
 
   def initialize(url=nil)
-    @url = url || 'http://localhost:9292/faye'
-    @client = Faye::Client.new(@url)
+    @uri = URI.parse(url || 'http://localhost:9292/faye')
   end
 
   def publish(args={})
     if args.keys.include?(:channel) and args.keys.include?(:data)
-      @client.publish(args[:channel],args[:data])
+      Net::HTTP.post_form(@uri, message: args)
     else
       raise ArgumentError, "Cannot publish a message without :channel nor :data"
     end

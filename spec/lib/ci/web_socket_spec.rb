@@ -3,10 +3,6 @@ require 'spec_helper'
 describe Ci::WebSocket do
   let(:ws) { Ci::WebSocket.new }
 
-  before do
-    ws.client.stub(:publish).and_return(true)
-  end
-
   it 'initializes the websocket connection' do
     expect {
       Ci::WebSocket.new
@@ -14,11 +10,11 @@ describe Ci::WebSocket do
   end
 
   it 'has the url for the connection' do
-    expect(ws.url).to eq('http://localhost:9292/faye')
+    expect(ws.uri).to eq(URI.parse('http://localhost:9292/faye'))
   end
 
   it 'sends a message through the websocket' do
-    expect(ws.client).to receive(:publish)
+    expect(Net::HTTP).to receive(:post_form)
     ws.publish(
       channel: 'foo',
       data: {

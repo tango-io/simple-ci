@@ -29,4 +29,4 @@ bundle exec sidekiq -d --pidfile tmp/pids/sidekiq.pid --logfile log/sidekiq.log 
 
 echo '* restart webserver'
 kill -s HUP `cat tmp/pids/puma.pid`
-bundle exec puma -d --pidfile tmp/pids/puma.pid -e production -p 3000
+bundle exec puma -d --pidfile tmp/pids/puma.pid -e production -p 4000

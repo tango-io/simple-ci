@@ -6,7 +6,7 @@ module Ci
     attr_reader :uri
 
     def initialize(url=nil)
-      @uri = URI.parse(url || 'http://simple-ci.r13.railsrumble.com/stream/faye')
+      @uri = URI.parse(url || 'http://simple-ci.tangosource.com/stream/faye')
     end
 
     def publish(args={})

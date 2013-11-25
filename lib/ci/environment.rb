@@ -6,7 +6,7 @@ module Ci
     def initialize(buffer = nil)
       @session = Ci::SSH.new(
         user: 'simple-ci',
-        host: '173.230.154.173',
+        host: 'simple-ci.tangosource.com',
         buffer: buffer
       )
     end
